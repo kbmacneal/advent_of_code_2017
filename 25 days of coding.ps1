@@ -6,8 +6,6 @@
   $closes = 0
   $counter = 0
 
-  $break = ""
-
   #solution 1
   foreach($char in $string.getenumerator())
   {
