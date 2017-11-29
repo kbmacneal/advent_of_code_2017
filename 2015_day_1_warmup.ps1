@@ -43,4 +43,4 @@ $string = '(((())))()((((((((())()(()))(()((((()(()(((()((()((()(()()()()()))(((
     $counter++
   }
 
-  $negatives | Select-Object -First 1
+  "First instance of the -1 floor is position $($negatives | Select-Object -First 1)"

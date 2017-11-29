@@ -56,6 +56,8 @@ $sequence = 'Down, Left, Right, Up, B, Up, B, B, Up, Left, Right, Up, Down, Righ
     }
   }
 
+  "The marker with the furthest taxi distance from the origin:"
+
   $marker_coords |
   Sort-Object -Property 'Taxi' -Descending |
   Select-Object -First 1
@@ -92,6 +94,8 @@ $sequence = 'Down, Left, Right, Up, B, Up, B, B, Up, Left, Right, Up, Down, Righ
     }
   }
 
+
+  "The two markers with the furthest distance from each other ((A,B) or (B,A)):"
   $compare |
   Sort-Object -Property 'Taxi' -Descending |
   Select-Object -First 1 |
