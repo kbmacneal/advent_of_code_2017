@@ -102,7 +102,7 @@ function get-middlecells
 
 $grid = New-Object -TypeName system.collections.arraylist
 
-[int[]]$rings = 2..260
+[int[]]$rings = 2..600
 
 [int[]]$first_xs = @(0, 1, 1, 0, -1, -1, -1, 0, 1)
 
