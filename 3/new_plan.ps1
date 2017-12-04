@@ -29,7 +29,7 @@ function get-middlecells
 
       [int]$max_y = $second_cell.Y
 
-      $results = New-Object -TypeName system.collections.arraylist
+      $results = New-Object -TypeName 'System.Collections.Generic.List[object]'
 
       [int]$i = $min_y + 1
 
@@ -48,7 +48,7 @@ function get-middlecells
         
       [int]$max_y = $second_cell.Y #-2
         
-      $results = New-Object -TypeName system.collections.arraylist
+      $results = New-Object -TypeName 'System.Collections.Generic.List[object]'
         
       [int]$i = $min_y - 1
         
@@ -67,7 +67,7 @@ function get-middlecells
         
       [int]$max_x = $second_cell.X
         
-      $results = New-Object -TypeName system.collections.arraylist
+      $results = New-Object -TypeName 'System.Collections.Generic.List[object]'
         
       [int]$i = $min_x - 1
         
@@ -86,7 +86,7 @@ function get-middlecells
         
       [int]$max_x = $second_cell.X
         
-      $results = New-Object -TypeName system.collections.arraylist
+      $results = New-Object -TypeName 'System.Collections.Generic.List[object]'
         
       [int]$i = $min_x + 1
         
@@ -104,9 +104,9 @@ function get-middlecells
   }
 }
 
-$grid = New-Object -TypeName system.collections.arraylist
+$grid = New-Object -TypeName 'System.Collections.Generic.List[object]'
 
-[int[]]$rings = 2..600
+[int[]]$rings = 2..$max_ring_size
 
 [int[]]$first_xs = @(0, 1, 1, 0, -1, -1, -1, 0, 1)
 
@@ -129,7 +129,7 @@ foreach($ring in $rings)
 
   $null = $grid.Add($curr_ring_first)
 
-  $points = New-Object System.collections.arraylist
+  $points = New-Object 'System.Collections.Generic.List[object]'
 
   $points = get-middlecells -first_cell $curr_ring_first -second_cell $top_right -direction up
 
@@ -137,7 +137,7 @@ foreach($ring in $rings)
 
   $null = $grid.Add($top_right)
 
-  $points = New-Object System.collections.arraylist
+  $points = New-Object 'System.Collections.Generic.List[object]'
     
   $points = get-middlecells -first_cell $top_right -second_cell $top_left -direction left
 
@@ -145,7 +145,7 @@ foreach($ring in $rings)
 
   $null = $grid.Add($top_left)
 
-  $points = New-Object System.collections.arraylist
+  $points = New-Object 'System.Collections.Generic.List[object]'
     
   $points = get-middlecells -first_cell $top_left -second_cell $bottom_left -direction down
 
@@ -153,7 +153,7 @@ foreach($ring in $rings)
 
   $null = $grid.Add($bottom_left)
 
-  $points = New-Object System.collections.arraylist
+  $points = New-Object 'System.Collections.Generic.List[object]'
     
   $points = get-middlecells -first_cell $bottom_left -second_cell $bottom_right -direction right
 
