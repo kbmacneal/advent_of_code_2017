@@ -1,3 +1,7 @@
+function new-spiral
+{
+  Param([int]$max_ring_size)
+
 function new-cell 
 {
   Param($x, $y)
@@ -172,6 +176,6 @@ foreach($point in $grid)
 [GC]::Collect()
 
  return $grid
-
+}
 
 
