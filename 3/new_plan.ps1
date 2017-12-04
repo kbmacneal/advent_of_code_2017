@@ -169,7 +169,9 @@ foreach($point in $grid)
   $i++
 }
 
+[GC]::Collect()
+
  return $grid
 
 
- [GC]::Collect()
+
