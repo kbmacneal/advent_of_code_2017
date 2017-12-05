@@ -9,6 +9,10 @@ function new-cell
     'Y' = $y
     'Ring' = $null
   }
+
+  $cell = New-Object -TypeName psobject -Property $properties
+
+  return $cell
 }
 
 function get-cell ($grid, $x, $y) {
@@ -26,7 +30,7 @@ else
 
 }
 
-$grid = new-spiral -max_ring_size 100
+$grid = new-spiral -max_ring_size 5
 
 foreach($cell in $grid)
 {
