@@ -1,4 +1,4 @@
-Stats for how long it takes to generate a ring of size N
+Stats for how long it takes to generate a ring of size N. Not on the best machine, but itll give some indication of the multiples involved and how the curve behaves.
 	
 ~~~~
 PS C:\Powershell\gitrepo\advent_of_code_2017\3> measure-command { new-spiral -max_ring_size 50}

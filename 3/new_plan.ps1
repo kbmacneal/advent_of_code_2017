@@ -161,7 +161,7 @@ foreach($ring in $rings)
 
   $null = $grid.Add($bottom_right)
 
-  "finished ring $ring"
+  write-verbose "finished ring $ring"
 }
 
 $i = 1
