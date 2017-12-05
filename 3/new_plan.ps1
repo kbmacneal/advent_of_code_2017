@@ -9,6 +9,7 @@ function new-cell
   $properties = [ordered]@{
     'X' = $x
     'Y' = $y
+    'Ring' = $null
   }
 
   $cell = New-Object -TypeName psobject -Property $properties
@@ -115,6 +116,7 @@ $grid = New-Object -TypeName 'System.Collections.Generic.List[object]'
 for ($i = 0; $i -lt $first_xs.Count; $i++) 
 {
   $cell = new-cell -x $first_xs[$i] -y $first_ys[$i]
+  $cell.Ring = 1
   $null = $grid.Add($cell)
 }
 
@@ -160,6 +162,13 @@ foreach($ring in $rings)
   foreach($point in $points){$null = $grid.Add($point)}
 
   $null = $grid.Add($bottom_right)
+
+  $ringers = $grid | where-object -Property Ring -eq $null
+
+  foreach($ringer in $ringers)
+  {
+    $ringer.Ring = $ring
+  }
 
   write-verbose "finished ring $ring"
 }
