@@ -1,5 +1,5 @@
 function loop-control ($i, $count) {
-    if ($i -ge $($mem_banks.Count - 1))
+    if ($i -ge $($count - 1))
     {$i = 0}
     
     else {$i++}
