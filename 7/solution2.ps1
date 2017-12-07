@@ -43,11 +43,11 @@ function assign-tochildren($node, $parent)
                 else{
                     if($child.Children)
                     {
-
+                        foreach ($child in $($child.Children)) {
+                            assign-tochildren -node $node -parent $child
+                        }
                     }
-                    foreach ($child in $($parent.Children)) {
-                        assign-tochildren -node $node -parent $child
-                    }
+                    
                 }
             }
         }
