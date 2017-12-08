@@ -15,6 +15,9 @@ class command {
 
 $inputs = get-content .\input.txt
 $commands = new-object System.Collections.ArrayList
+
+$max = 0
+
 foreach ($item in $inputs) {
     
   $item_array = $item -split " "
@@ -159,4 +162,4 @@ switch ($command.increase) {
 }
 }
 
-$register_list
+$register_list.Values | sort -Descending | select -First 1
