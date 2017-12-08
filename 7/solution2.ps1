@@ -253,6 +253,7 @@ do {
             {
                 $y = $trees.Count
                 $trees.removeat($i)
+                $i = loop-control -i $i -count $trees.Count
                 break
             }
             else{
