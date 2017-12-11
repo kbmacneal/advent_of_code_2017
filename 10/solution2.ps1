@@ -1,6 +1,3 @@
-# Part 1 input
- #$lengths = 102,255,99,252,200,24,219,57,103,2,226,254,1,0,69,216
-
 $lengths = @([int[]][System.Text.Encoding]::ASCII.GetBytes('102,255,99,252,200,24,219,57,103,2,226,254,1,0,69,216')) + @(17,31,73,47,23)
 $list = 0..255
 
@@ -26,8 +23,6 @@ $skipSize = 0
         $curPos = ($curPos + $len + $skipSize) % $list.count
         $skipSize++
     }
-    # Part 1 output
-     #$list[0] * $list[1]<#
 }
 
 $sixteens = 0..15|%{ ,((($_*16)..(($_*16)+15)))}
