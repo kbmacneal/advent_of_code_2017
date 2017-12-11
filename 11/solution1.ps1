@@ -57,6 +57,6 @@ foreach ($command in $inputs) {
 
     $null = $pointlist.Add($point)
 }
-$pointlist | out-file pointlist.txt
+$pointlist | Format-Table -AutoSize | out-file pointlist.txt
 $pointlist[$($pointlist.Count-1)]
 $pointlist[$($pointlist.Count-1)].Distance
