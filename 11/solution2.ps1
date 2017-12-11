@@ -60,3 +60,6 @@ foreach ($command in $inputs) {
 
 
 $pointlist | sort -Property Distance -Descending | select -First 1
+
+
+$pointlist | Export-Csv -Delimiter "`t" -Path pointlist.txt

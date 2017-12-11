@@ -34,9 +34,6 @@ foreach ($command in $inputs) {
          "ne" { 
             $point = new-point -x $($last_position.X +1) -y $($last_position.Y) -z $($last_position.Z - 1)
          }
-         "e" { 
-            $point = new-point -x $($last_position.X +1) -y $($last_position.Y) -z $($last_position.Z + 1)
-         }
          "se" { 
             $point = new-point -x $($last_position.X+1) -y $($last_position.Y - 1) -z $($last_position.Z)
          }
@@ -46,9 +43,6 @@ foreach ($command in $inputs) {
          "sw" { 
             $point = new-point -x $($last_position.X -1) -y $($last_position.Y) -z $($last_position.Z + 1)
          }
-         "w" { 
-            $point = new-point -x $($last_position.X-1) -y $($last_position.Y) -z $($last_position.Z + 1)
-         }
          "nw" { 
             $point = new-point -x $($last_position.X-1) -y $($last_position.Y + 1) -z $($last_position.Z)
          }
@@ -57,6 +51,6 @@ foreach ($command in $inputs) {
 
     $null = $pointlist.Add($point)
 }
-$pointlist | Format-Table -AutoSize | out-file pointlist.txt
+$pointlist | Export-Csv -Delimiter "`t" -Path pointlist.txt -NoTypeInformation
 $pointlist[$($pointlist.Count-1)]
 $pointlist[$($pointlist.Count-1)].Distance
