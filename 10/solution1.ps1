@@ -23,3 +23,5 @@ $skipSize = 0
     }
     # Part 1 output
      $list[0] * $list[1]
+
+     #from https://www.reddit.com/r/adventofcode/comments/7irzg5/2017_day_10_solutions/dr12q92/
