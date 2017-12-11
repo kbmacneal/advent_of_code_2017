@@ -1,9 +1,14 @@
-$lengths = 102,255,99,252,200,24,219,57,103,2,226,254,1,0,69,216
+# Part 1 input
+ #$lengths = 102,255,99,252,200,24,219,57,103,2,226,254,1,0,69,216
 
+$lengths = @([int[]][System.Text.Encoding]::ASCII.GetBytes('102,255,99,252,200,24,219,57,103,2,226,254,1,0,69,216')) + @(17,31,73,47,23)
 $list = 0..255
 
 $curPos = 0
 $skipSize = 0
+
+
+0..63 | ForEach-Object {
 
     foreach ($len in $lengths)
     {
@@ -22,4 +27,18 @@ $skipSize = 0
         $skipSize++
     }
     # Part 1 output
-     $list[0] * $list[1]
+     #$list[0] * $list[1]<#
+}
+
+$sixteens = 0..15|%{ ,((($_*16)..(($_*16)+15)))}
+
+$denseHash = foreach ($set in $sixteens)
+{
+    $out = $list[$set[0]]
+    foreach ($index in $set[1..15]){ $out = $out -bxor $list[$index] }
+    $out
+}
+
+-join ($denseHash | foreach { '{0:x2}' -f $_ })
+
+#from https://www.reddit.com/r/adventofcode/comments/7irzg5/2017_day_10_solutions/dr12q92/
