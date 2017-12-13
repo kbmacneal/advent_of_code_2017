@@ -20,8 +20,6 @@ $caught = $false
 
 while ($caught) {
     $caught = $false
-
-    $time
     for($i=0; $i -lt $($firewalls.Keys | measure -Maximum).Maximum + 1 ; $i++)
     {
         if ($firewalls[$i] -ne $null) {
