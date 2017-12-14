@@ -60,18 +60,41 @@ function get-knothash
 
 function get-connectedcells($cell_list, [int]$start_x, [int]$start_y, [int]$regnum)
 {
-	$up_cell = $cell_list[$start_x,$($start_y + 1)]
-	$down_cell = $cell_list[$start_x,$($start_y - 1)]
-	$left_cell = $cell_list[$($start_x - 1),$start_y]
-	$right_cell = $cell_list[$($start_x + 1),$start_y]
+	$up_cell = $null
+	$down_cell = $null
+	$left_cell = $null
+	$right_cell = $null
+
+	$up = $start_y + 1
+	$down = $start_y - 1
+	$left = $start_x - 1
+	$right = $start_x + 1
 	
+	if ($up -lt 128)
+	{
+		$up_cell = $cell_list[$start_x,$($start_y + 1)]
+	}
+	if ($down -gt 0)
+	{
+		$down_cell = $cell_list[$start_x,$($start_y - 1)]
+	}
+
+	if ($left -gt 0) {
+		$left_cell = $cell_list[$($start_x - 1),$start_y]
+	}
+	if ($right -lt 128)
+	{
+		$right_cell = $cell_list[$($start_x + 1),$start_y]
+	}
+
+	"$start_x : $start_y"
 
 	if ($up_cell -ne $null)
  {
 		if ($up_cell.Occupied -eq $true -and $up_cell.link_num -eq 0)
 		{
 			$up_cell.Link_Num = $regnum
-			get-connectedcells -cell_list $cell_list -start_x $start_x -start_y $($start_y + 1) -regnum $regnum
+			get-connectedcells -cell_list $cell_list -start_x $start_x -start_y $up -regnum $regnum
 		}
 	}
 
@@ -80,7 +103,7 @@ function get-connectedcells($cell_list, [int]$start_x, [int]$start_y, [int]$regn
 		if ($down_cell.Occupied -eq $true -and $down_cell.link_num -eq 0)
 		{
 			$down_cell.Link_Num = $regnum
-			get-connectedcells -cell_list $cell_list -start_x $start_x -start_y $($start_y - 1) -regnum $regnum
+			get-connectedcells -cell_list $cell_list -start_x $start_x -start_y $down -regnum $regnum
 		}
 	}
 
@@ -89,7 +112,7 @@ function get-connectedcells($cell_list, [int]$start_x, [int]$start_y, [int]$regn
 		if ($left_cell.Occupied -eq $true -and $left_cell.link_num -eq 0)
 		{
 			$left_cell.Link_Num = $regnum
-			get-connectedcells -cell_list $cell_list -start_x $($start_x - 1) -start_y $start_y -regnum $regnum
+			get-connectedcells -cell_list $cell_list -start_x $left -start_y $start_y -regnum $regnum
 		}
 	}
 
@@ -98,7 +121,7 @@ function get-connectedcells($cell_list, [int]$start_x, [int]$start_y, [int]$regn
 		if ($right_cell.Occupied -eq $true -and $right_cell.link_num -eq 0)
 		{
 			$right_cell.Link_Num = $regnum
-			get-connectedcells -cell_list $cell_list -start_x $($start_x + 1) -start_y $start_y -regnum $regnum
+			get-connectedcells -cell_list $cell_list -start_x $right -start_y $start_y -regnum $regnum
 		}
 	}
 
@@ -191,7 +214,7 @@ for ($i = 0; $i -lt 128; $i++)
 
 "Grid Populated"
 
-$region_number = 0
+$region_number = 1
 
 for ($i = 0; $i -lt 128; $i++)
 {
@@ -200,8 +223,10 @@ for ($i = 0; $i -lt 128; $i++)
 		$cell = $grid[$j,$i]
 		if ($cell.link_num -eq 0)
 		{
-			$region_number++
+			"---------"			
 			get-connectedcells -cell_list $grid -start_x $j -start_y $i -regnum $region_number
+			$region_number++
+			"---------"
 		}
 	}
 }
