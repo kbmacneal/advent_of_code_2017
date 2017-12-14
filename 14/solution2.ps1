@@ -72,12 +72,15 @@ function get-connectedcells($cell_list,[cell]$cell_start,[int]$regnum)
     [void]$connected.Add($right_cell)
 
     foreach ($cell in $connected) {
-
-        if($cell.Occupied -eq $true -and $cell.link_num -eq $null)
-        {
-            $cell.Link_Num = $regnum
-            get-connectedcells -cell_list $cell_list -cell_start $cell -regnum $regnum
-        }
+if($cell -ne $null)
+{
+    if($cell.Occupied -eq $true -and $cell.link_num -eq $null)
+    {
+        $cell.Link_Num = $regnum
+        get-connectedcells -cell_list $cell_list -cell_start $cell -regnum $regnum
+    }
+}
+        
         
     }
 
@@ -128,7 +131,7 @@ for($i = 0; $i -lt 128; $i++)
     for($j = 0; $j -lt 128; $j++)
     {
         $cell = new-cell -x $i -y $j
-        $null = $grid.add($cell)
+        $grid.add($cell)
     }
 }
 
