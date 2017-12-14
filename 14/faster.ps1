@@ -234,3 +234,5 @@ for ($i = 0; $i -lt 128; $i++)
 #should be 1212
 
 return $region_number
+
+[GC]::Collect()
