@@ -72,19 +72,19 @@ function get-connectedcells($cell_list, [int]$start_x, [int]$start_y, [int]$regn
 	
 	if ($up -lt 128)
 	{
-		$up_cell = $cell_list[$start_x,$($start_y + 1)]
+		$up_cell = $cell_list[$start_x,$up]
 	}
 	if ($down -gt 0)
 	{
-		$down_cell = $cell_list[$start_x,$($start_y - 1)]
+		$down_cell = $cell_list[$start_x,$down]
 	}
 
 	if ($left -gt 0) {
-		$left_cell = $cell_list[$($start_x - 1),$start_y]
+		$left_cell = $cell_list[$left,$start_y]
 	}
 	if ($right -lt 128)
 	{
-		$right_cell = $cell_list[$($start_x + 1),$start_y]
+		$right_cell = $cell_list[$right,$start_y]
 	}
 
 	"$start_x : $start_y"
@@ -179,13 +179,13 @@ for ($i = 0; $i -lt 128; $i++)
 	}
 }
 #for debuggin, no sense wasting time generating the hashes over and over again
-<#$rows = 0..127 | foreach {
+$rows = 0..127 | foreach {
 	(get-knothash "$inputs-$_")
-}#>
+}
 
 #$rows | export-clixml .\rows.xml
 
-$rows = import-clixml .\rows.xml
+#$rows = import-clixml .\rows.xml
 
 "Hashes Generated"
 
@@ -209,8 +209,6 @@ for ($i = 0; $i -lt 128; $i++)
 		$counter++
 	}
 }
-#$grid = import-clixml .\grid.xml
-#$grid | Export-Clixml .\grid.xml
 
 "Grid Populated"
 
@@ -221,7 +219,7 @@ for ($i = 0; $i -lt 128; $i++)
 	for ($j = 0; $j -lt 128; $j++)
  {
 		$cell = $grid[$j,$i]
-		if ($cell.link_num -eq 0)
+		if ($cell.link_num -eq 0 -and $cell.Occupied -eq $true)
 		{
 			"---------"			
 			get-connectedcells -cell_list $grid -start_x $j -start_y $i -regnum $region_number
