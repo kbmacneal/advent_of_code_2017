@@ -7042,11 +7042,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "c:\\advent_of_code_2017\\14\\get_groups\\get_groups.csproj",
+      "projectUniqueName": "C:\\advent_of_code_2017\\14\\get_groups\\get_groups.csproj",
       "projectName": "get_groups",
-      "projectPath": "c:\\advent_of_code_2017\\14\\get_groups\\get_groups.csproj",
+      "projectPath": "C:\\advent_of_code_2017\\14\\get_groups\\get_groups.csproj",
       "packagesPath": "C:\\Users\\Kenneth MacNeal\\.nuget\\packages\\",
-      "outputPath": "c:\\advent_of_code_2017\\14\\get_groups\\obj\\",
+      "outputPath": "C:\\advent_of_code_2017\\14\\get_groups\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Kenneth MacNeal\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -7074,7 +7074,7 @@
         "dependencies": {
           "Microsoft.NETCore.App": {
             "target": "Package",
-            "version": "1.1.2",
+            "version": "[1.1.2, )",
             "autoReferenced": true
           }
         }
