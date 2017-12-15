@@ -6,8 +6,14 @@
 		{
 			"label": "build",
 			"command": "dotnet build",
+			"options":{
+				"cwd":"${workspaceFolder}"
+			},
 			"type": "shell",
-			"group": "build",
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			},
 			"presentation": {
 				"reveal": "silent"
 			},
