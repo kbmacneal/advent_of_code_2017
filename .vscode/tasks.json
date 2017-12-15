@@ -2,12 +2,22 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "taskName": "build",
+            "label": "build15",
             "command": "dotnet",
             "type": "process",
             "args": [
                 "build",
                 "${workspaceFolder}/15/compiled/compiled.csproj"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "build14",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "build",
+                "${workspaceFolder}/14/get_groups/get_groups.csproj"
             ],
             "problemMatcher": "$msCompile"
         }
