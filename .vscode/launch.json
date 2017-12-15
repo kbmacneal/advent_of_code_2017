@@ -10,9 +10,9 @@
 			"type": "coreclr",
 			"request": "launch",
 			"preLaunchTask": "build",
-			"program": "/c/advent_of_code_2014/14/get_groups/bin/Debug/netcoreapp1.1/get_groups.dll",
+			"program": "/c/advent_of_code_2017/14/get_groups/bin/Debug/netcoreapp1.1/get_groups.dll",
 			"args": [],
-			"cwd": "/c/advent_of_code_2014/14/get_groups/",
+			"cwd": "/c/advent_of_code_2017/14/get_groups/",
 			"stopAtEntry": false,
 			"console": "internalConsole"
 		},
