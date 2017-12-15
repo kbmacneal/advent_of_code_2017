@@ -39,6 +39,7 @@ function get-knothash
 			$curPos = ($curPos + $len + $skipSize) % $list.count
 			$skipSize++
 		}
+		
 	}
     
 	#generates 16 sets of 16
