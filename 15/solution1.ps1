@@ -85,11 +85,6 @@ for ($i = 0; $i -lt 40000000; $i++)
 	}
 	Write-Progress -Activity "calculating list" -Status $count.tostring() -PercentComplete $(($i/4000000)*100)
 	
-
-	#[Math]::Round([System.Decimal]$($i / 4000000), [System.MidpointRounding]::AwayFromZero)
-
-	#$i
-	
 }
 
 write-progress -completed
