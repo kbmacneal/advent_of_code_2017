@@ -116,5 +116,5 @@ for ($i = 0; $i -lt $a_compare_list.count; $i++)
 }
 
 
-
+#should be 
 $count

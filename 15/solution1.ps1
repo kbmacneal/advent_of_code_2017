@@ -67,6 +67,10 @@ $b_val_list = new-object 'System.Collections.Generic.List[System.Uint64]'
 [void]$a_val_list.Add($gen_a_start)
 [void]$b_val_list.Add($gen_b_start)
 
+$a_compare_list = new-object 'System.Collections.Generic.List[System.String]'
+
+$b_compare_list = new-object 'System.Collections.Generic.List[System.String]'
+
 
 for ($i = 0; $i -lt 40000000; $i++)
 {
@@ -79,14 +83,23 @@ for ($i = 0; $i -lt 40000000; $i++)
 	[void]$b_val_list.Add($b_val)
 	$b_compare = convert_to_bin -value $b_val
 
-	if ($a_compare -eq $b_compare)
-	{
-		$count++
-	}
+	[void]$a_compare_list.add($a_compare)
+	[void]$b_compare_list.add($b_compare)
+
+	
 	Write-Progress -Activity "calculating list" -Status $count.tostring() -PercentComplete $(($i/4000000)*100)
 	
 }
 
 write-progress -completed
 
+for($i = 0; $i -lt $a_compare_list.count; $i++){
+	if($a_compare_list[$i] -eq $b_compare_list[$i])
+	{
+		$count++
+	}
+}
+
+
+#should be 612
 $count
