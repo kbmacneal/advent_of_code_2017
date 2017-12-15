@@ -1,23 +1,15 @@
 {
-	// See https://go.microsoft.com/fwlink/?LinkId=733558
-	// for the documentation about the tasks.json format
-	"version": "2.0.0",
-	"tasks": [
-		{
-			"label": "build",
-			"command": "dotnet run",
-			"options":{
-				"cwd":"${workspaceFolder}/15/compiled"
-			},
-			"type": "shell",
-			"group": {
-				"kind": "build",
-				"isDefault": true
-			},
-			"presentation": {
-				"reveal": "silent"
-			},
-			"problemMatcher": "$msCompile"
-		}
-	]
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "taskName": "build",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "build",
+                "${workspaceFolder}/15/compiled/compiled.csproj"
+            ],
+            "problemMatcher": "$msCompile"
+        }
+    ]
 }

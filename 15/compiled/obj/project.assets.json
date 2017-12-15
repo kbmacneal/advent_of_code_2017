@@ -670,11 +670,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\advent_of_code_2017\\15\\compiled\\compiled.csproj",
+      "projectUniqueName": "c:\\advent_of_code_2017\\15\\compiled\\compiled.csproj",
       "projectName": "compiled",
-      "projectPath": "C:\\advent_of_code_2017\\15\\compiled\\compiled.csproj",
+      "projectPath": "c:\\advent_of_code_2017\\15\\compiled\\compiled.csproj",
       "packagesPath": "C:\\Users\\Kenneth MacNeal\\.nuget\\packages\\",
-      "outputPath": "C:\\advent_of_code_2017\\15\\compiled\\obj\\",
+      "outputPath": "c:\\advent_of_code_2017\\15\\compiled\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
