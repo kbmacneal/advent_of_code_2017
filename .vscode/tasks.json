@@ -5,9 +5,9 @@
 	"tasks": [
 		{
 			"label": "build",
-			"command": "dotnet build",
+			"command": "dotnet run",
 			"options":{
-				"cwd":"${workspaceFolder}"
+				"cwd":"${workspaceFolder}/15/compiled"
 			},
 			"type": "shell",
 			"group": {
