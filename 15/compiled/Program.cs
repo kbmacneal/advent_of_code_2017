@@ -13,25 +13,6 @@ namespace compiled {
 
             ulong shared_divisor = 2147483647;
 
-            Hashtable hex = new Hashtable ();
-
-            hex["0"] = "0000";
-            hex["1"] = "0001";
-            hex["2"] = "0010";
-            hex["3"] = "0011";
-            hex["4"] = "0100";
-            hex["5"] = "0101";
-            hex["6"] = "0110";
-            hex["7"] = "0111";
-            hex["8"] = "1000";
-            hex["9"] = "1001";
-            hex["a"] = "1010";
-            hex["b"] = "1011";
-            hex["c"] = "1100";
-            hex["d"] = "1101";
-            hex["e"] = "1110";
-            hex["f"] = "1111";
-
             int count = 0;
             List<UInt64> a_val_list = new List<ulong> ();
             List<UInt64> b_val_list = new List<ulong> ();
@@ -52,8 +33,8 @@ namespace compiled {
                 a_val_list.Add (a_val);
                 b_val_list.Add (b_val);
 
-                string a_compare = convert_to_bin (a_val, hex);
-                string b_compare = convert_to_bin (b_val, hex);
+                string a_compare = convert_to_bin (a_val);
+                string b_compare = convert_to_bin (b_val);
 
                 a_compare_list.Add (a_compare);
                 b_compare_list.Add (b_compare);
@@ -77,18 +58,21 @@ namespace compiled {
             return val;
         }
 
-        public static string convert_to_bin (UInt64 value, Hashtable hex_list) {
-            List<int> binary_str_array = new List<int> ();
-            string returner = string.Empty;
+        public static string convert_to_bin (UInt64 value) {
 
-            foreach (char item in value.ToString ().ToCharArray ()) {
-                string hexcode = hex_list[item.ToString ()].ToString ();
+            string returner = Convert.ToString ((long) value, 2);
 
-                returner += Convert.ToInt32 (hexcode);
+            int padding = 0;
+            if (returner.Length < 16) {
+                padding = 16 - (returner.Length);
+                string pad = new string ('0', padding);
+                returner = pad.ToString () + returner;
             }
 
             returner = returner.Substring ((returner.Length - 16), 16);
+
             return returner;
+
         }
     }
 }
