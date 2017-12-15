@@ -80,7 +80,7 @@ $a_compare_list = new-object 'System.Collections.Generic.List[System.String]'
 $b_compare_list = new-object 'System.Collections.Generic.List[System.String]'
 
 
-for ($i = 0; $i -lt 40000000; $i++)
+for ($i = 0; $i -lt 5000000; $i++)
 {
 	
 	[System.Uint64]$a_val = calc_value -value $($a_val_list[$a_val_list.Count - 1]) -multiple $factor_a -divisor $shared_divisor -check 4
