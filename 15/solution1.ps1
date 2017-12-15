@@ -68,7 +68,7 @@ $b_val_list = new-object 'System.Collections.Generic.List[System.Uint64]'
 [void]$b_val_list.Add($gen_b_start)
 
 
-for ($i = 0; $i -lt 4000000; $i++)
+for ($i = 0; $i -lt 40000000; $i++)
 {
 	
 	[System.Uint64]$a_val = calc_value -value $($a_val_list[$a_val_list.Count - 1]) -multiple $factor_a -divisor $shared_divisor
