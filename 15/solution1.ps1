@@ -39,23 +39,10 @@ function convert_to_bin([System.Uint64]$value)
 	$binary_Str_array = new-object 'System.Collections.Generic.List[int]'
 
 	$null = -join ($value.tostring().getenumerator() | foreach {$hex["$_"]} | foreach {[void]$binary_Str_array.Add([int]$_)})
-
-	#$binary_Str = -join ($rows| foreach {$_.getenumerator().foreach{$hex["$_"]}})
-
-	#$binary_Str.GetEnumerator() | foreach {[void]$binary_Str_array.Add([int]$_)}
-
+	
 	[string]$final_bin_string = $binary_Str_array -join ""
 
-	if ($final_bin_string.ToString().Length -le 16)
-	{
-		return $final_bin_string.ToString()
-	}
-	else
- {
-		return $final_bin_string.ToString().Substring($($final_bin_string.ToString().Length - 16),16)
-	}
-
-	
+	return $final_bin_string.ToString().Substring($($final_bin_string.ToString().Length - 16),16)	
 }
 
 $count = 0
@@ -87,14 +74,15 @@ for ($i = 0; $i -lt 40000000; $i++)
 	[void]$b_compare_list.add($b_compare)
 
 	
-	Write-Progress -Activity "calculating list" -Status $count.tostring() -PercentComplete $(($i/4000000)*100)
+	Write-Progress -Activity "calculating list" -Status $count.tostring() -PercentComplete $(($i / 4000000) * 100)
 	
 }
 
 write-progress -completed
 
-for($i = 0; $i -lt $a_compare_list.count; $i++){
-	if($a_compare_list[$i] -eq $b_compare_list[$i])
+for ($i = 0; $i -lt $a_compare_list.count; $i++)
+{
+	if ($a_compare_list[$i] -eq $b_compare_list[$i])
 	{
 		$count++
 	}

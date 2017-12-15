@@ -5,7 +5,7 @@ $gen_a_start = 722
 $gen_b_start = 354
 
 #use modulo
-$shared_divisor = 2147483647
+$shared_dividend = 2147483647
 
 $hex = @{
 	'0' = '0000'
@@ -26,13 +26,13 @@ $hex = @{
 	'f' = '1111'
 }
 
-function calc_value([System.Uint64]$value, $multiple, $divisor, $check)
+function calc_value([System.Uint64]$value, $multiple, $dividend, $check)
 {
-	[System.Uint64]$val = (($value * $multiple) % $divisor) % $check
+	[System.Uint64]$val = (($value * $multiple) % $dividend) % $check
 
 	if ($val -eq 0)
 	{
-		return (($value * $multiple) % $divisor)
+		return (($value * $multiple) % $dividend)
 	}
 	else
  {
@@ -48,22 +48,9 @@ function convert_to_bin([System.Uint64]$value)
 
 	$null = -join ($value.tostring().getenumerator() | foreach {$hex["$_"]} | foreach {[void]$binary_Str_array.Add([int]$_)})
 
-	#$binary_Str = -join ($rows| foreach {$_.getenumerator().foreach{$hex["$_"]}})
-
-	#$binary_Str.GetEnumerator() | foreach {[void]$binary_Str_array.Add([int]$_)}
-
 	[string]$final_bin_string = $binary_Str_array -join ""
 
-	if ($final_bin_string.ToString().Length -le 16)
-	{
-		return $final_bin_string.ToString()
-	}
-	else
- {
-		return $final_bin_string.ToString().Substring($($final_bin_string.ToString().Length - 16),16)
-	}
-
-	
+	return $final_bin_string.ToString().Substring($($final_bin_string.ToString().Length - 16),16)	
 }
 
 $count = 0
@@ -83,16 +70,16 @@ $b_compare_list = new-object 'System.Collections.Generic.List[System.String]'
 for ($i = 0; $i -lt 5000000; $i++)
 {
 	
-	[System.Uint64]$a_val = calc_value -value $($a_val_list[$a_val_list.Count - 1]) -multiple $factor_a -divisor $shared_divisor -check 4
+	[System.Uint64]$a_val = calc_value -value $($a_val_list[$a_val_list.Count - 1]) -multiple $factor_a -dividend $shared_dividend -check 4
 	[void]$a_val_list.Add($a_val)
-	if($a_val -ne 0)
+	if ($a_val -ne 0)
 	{
 		$a_compare = convert_to_bin -value $a_val
 		[void]$a_compare_list.add($a_compare)
 	}
 	
 	
-	[System.Uint64]$b_val = calc_value -value $($b_val_list[$b_val_list.Count - 1]) -multiple $factor_b -divisor $shared_divisor -check 8
+	[System.Uint64]$b_val = calc_value -value $($b_val_list[$b_val_list.Count - 1]) -multiple $factor_b -dividend $shared_dividend -check 8
 	[void]$b_val_list.Add($b_val)
 	if ($b_val -ne 0)
 	{
@@ -101,7 +88,7 @@ for ($i = 0; $i -lt 5000000; $i++)
 	}
 
 	
-	Write-Progress -Activity "calculating list" -Status $count.tostring() -PercentComplete $(($i / 4000000) * 100)
+	Write-Progress -Activity "calculating list" -Status $count.tostring() -PercentComplete $(($i / 5000000) * 100)
 	
 }
 
@@ -116,5 +103,5 @@ for ($i = 0; $i -lt $a_compare_list.count; $i++)
 }
 
 
-#should be 
+#should be 285
 $count
