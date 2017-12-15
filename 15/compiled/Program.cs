@@ -5,6 +5,12 @@ using System.Collections.Generic;
 namespace compiled {
     class Program {
         static void Main (string[] args) {
+            if (args[0] == "2") {
+                int part2 = compiled.Program.part2 ();
+                Console.WriteLine (part2);
+                return;
+            }
+
             ulong factor_a = 16807;
             ulong factor_b = 48271;
 
@@ -14,27 +20,20 @@ namespace compiled {
             ulong shared_divisor = 2147483647;
 
             int count = 0;
-            List<UInt64> a_val_list = new List<ulong> ();
-            List<UInt64> b_val_list = new List<ulong> ();
-            a_val_list.Add (Convert.ToUInt64 (gen_a_start));
-            b_val_list.Add (Convert.ToUInt64 (gen_b_start));
+
+            ulong last_a = gen_a_start;
+            ulong last_b = gen_b_start;
+
             List<string> a_compare_list = new List<string> ();
             List<string> b_compare_list = new List<string> ();
 
             for (int i = 0; i < 40000000; i++) {
 
-                int a_val_count = a_val_list.Count - 1;
-                int b_val_count = b_val_list.Count - 1;
+                last_a = calc_value (last_a, factor_a, shared_divisor);
+                last_b = calc_value (last_b, factor_b, shared_divisor);
 
-                ulong a_val = calc_value (a_val_list[a_val_count], factor_a, shared_divisor);
-
-                ulong b_val = calc_value (b_val_list[b_val_count], factor_b, shared_divisor);
-
-                a_val_list.Add (a_val);
-                b_val_list.Add (b_val);
-
-                string a_compare = convert_to_bin (a_val);
-                string b_compare = convert_to_bin (b_val);
+                string a_compare = convert_to_bin (last_a);
+                string b_compare = convert_to_bin (last_b);
 
                 a_compare_list.Add (a_compare);
                 b_compare_list.Add (b_compare);
@@ -73,6 +72,50 @@ namespace compiled {
 
             return returner;
 
+        }
+
+        public static int part2 () {
+            ulong factor_a = 16807;
+            ulong factor_b = 48271;
+
+            ulong gen_a_start = 722;
+            ulong gen_b_start = 354;
+
+            ulong shared_divisor = 2147483647;
+
+            int count = 0;
+
+            ulong last_a = gen_a_start;
+            ulong last_b = gen_b_start;
+
+            List<string> a_compare_list = new List<string> ();
+            List<string> b_compare_list = new List<string> ();
+
+            for (int i = 0; i < 5000000; i++) {
+
+                last_a = calc_value (last_a, factor_a, shared_divisor);
+                last_b = calc_value (last_b, factor_b, shared_divisor);
+
+                if (last_a % (ulong) 4 == 0) {
+                    string a_compare = convert_to_bin (last_a);
+                    a_compare_list.Add (a_compare);
+                }
+
+                if (last_b % (ulong) 8 == 0) {
+                    string b_compare = convert_to_bin (last_b);
+                    b_compare_list.Add (b_compare);
+                }
+
+            }
+
+            for (int i = 0; i < a_compare_list.Count; i++) {
+                if (a_compare_list[i] == b_compare_list[i]) {
+                    count++;
+                }
+
+            }
+
+            return count;
         }
     }
 }
