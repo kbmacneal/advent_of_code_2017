@@ -1,3 +1,5 @@
+#based on the math posted to the subreddit, you know that the string loops back into a predictable state somewhere in the first 19600 attempts. if you know that, you can build the algorithm that way from the beginning
+
 function perform_dance($programs, $inputs) {
     
     
@@ -61,37 +63,32 @@ $inputs = (Get-Content .\input.txt) -split ","
 
 $letters = [char[]]([char]'a'..[char]'p')
 
-for ($i = 0; $i -lt 16; $i++) {
-    $programs += $letters[$i]
+foreach($letter in $letters)
+{
+    $programs += $letter
 }
 
-$known_states = New-Object 'System.Collections.Generic.List[Array]'
+$first = $programs
 
-$end = 1000000000
+$known_states = New-Object 'System.Collections.Generic.List[Array]'
+$known_states.Add($programs)
+
+$end = 19600
 
 $iteration = for ($i = 0; $i -lt $end; $i++) {
     
     $programs = perform_dance -programs $programs -inputs $inputs
-    if ($programs -in $known_states -and $i -ne $end) {
-        return $i
-    }
-    if ($i -eq 19600) {
-        return 0
-    }
+    
     [void]$known_states.Add($programs)
     write-host $i
 }
 
-$iteration
+#it will loop somewhere, and that loop will begin with the first element 
 
-if ($iteration -eq 0) {
-    return $programs
-}
+$loop_begin = $known_states.LastIndexOf($first)
 
-$cycles_remaining = $end % $iteration
-$end_index = $iteration - $cycles_remaining
+$indexes_remaining = $end % $loop_begin
+$end_index = $loop_begin - $indexes_remaining
 $programs = $known_states[$end_index]
 
 return $programs
-
-#bfcdeakhijmlgopn
