@@ -72,6 +72,3 @@ for ($i = 0; $i -lt 1000000000; $i++) {
 }
 
 return $programs -join ""
-
-#padheomkgjfnblic
-#neghbdlkjmcpfaoi
