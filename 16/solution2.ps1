@@ -61,8 +61,6 @@ function part1($programs) {
 
 $letters = [char[]]([char]'a'..[char]'p')
 
-[string[]]$programs = @()
-
 $programs = New-Object System.Collections.ArrayList
 
 for ($i = 0; $i -lt 16; $i++) {
@@ -74,3 +72,6 @@ for ($i = 0; $i -lt 1000000000; $i++) {
 }
 
 return $programs -join ""
+
+#padheomkgjfnblic
+#neghbdlkjmcpfaoi
