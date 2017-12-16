@@ -1,5 +1,5 @@
-function part1($programs) {
-    $inputs = (Get-Content .\input.txt) -split ","
+function part1($programs, $inputs) {
+    
     
     foreach ($command in $inputs) {
         switch ($command.tostring().substring(0, 1)) {
@@ -55,7 +55,7 @@ function part1($programs) {
     
 }
 
-
+$inputs = (Get-Content .\input.txt) -split ","
 
 [string[]]$programs = @()
 
@@ -68,7 +68,7 @@ for ($i = 0; $i -lt 16; $i++) {
 }
 
 for ($i = 0; $i -lt 1000000000; $i++) {
-    $programs = part1 -programs $programs
+    $programs = part1 -programs $programs -inputs $inputs
 }
 
 return $programs -join ""
