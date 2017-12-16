@@ -25,7 +25,8 @@
             "console": "internalConsole",
             "stopAtEntry": false,
             "internalConsoleOptions": "openOnSessionStart",
-            "justMyCode": false
+            "justMyCode": false,
+            "requireExactSource": false
         },
         {
             "name": "debug 14",

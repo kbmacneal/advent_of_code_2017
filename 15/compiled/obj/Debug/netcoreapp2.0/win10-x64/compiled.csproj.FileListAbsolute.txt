@@ -1,16 +1,3 @@
-C:\advent_of_code_2017\15\compiled\output\netcoreapp2.0\win10-x64\hostpolicy.dll
-C:\advent_of_code_2017\15\compiled\output\netcoreapp2.0\win10-x64\hostfxr.dll
-C:\advent_of_code_2017\15\compiled\output\netcoreapp2.0\win10-x64\compiled.exe
-C:\advent_of_code_2017\15\compiled\output\netcoreapp2.0\win10-x64\compiled.deps.json
-C:\advent_of_code_2017\15\compiled\output\netcoreapp2.0\win10-x64\compiled.runtimeconfig.json
-C:\advent_of_code_2017\15\compiled\output\netcoreapp2.0\win10-x64\compiled.runtimeconfig.dev.json
-C:\advent_of_code_2017\15\compiled\output\netcoreapp2.0\win10-x64\compiled.dll
-C:\advent_of_code_2017\15\compiled\output\netcoreapp2.0\win10-x64\compiled.pdb
-C:\advent_of_code_2017\15\compiled\obj\Debug\netcoreapp2.0\win10-x64\compiled.csproj.CoreCompileInputs.cache
-C:\advent_of_code_2017\15\compiled\obj\Debug\netcoreapp2.0\win10-x64\compiled.AssemblyInfoInputs.cache
-C:\advent_of_code_2017\15\compiled\obj\Debug\netcoreapp2.0\win10-x64\compiled.AssemblyInfo.cs
-C:\advent_of_code_2017\15\compiled\obj\Debug\netcoreapp2.0\win10-x64\compiled.dll
-C:\advent_of_code_2017\15\compiled\obj\Debug\netcoreapp2.0\win10-x64\compiled.pdb
 C:\Users\kentw\Desktop\git_workspace\advent_of_code_2017\15\compiled\output\netcoreapp2.0\win10-x64\hostpolicy.dll
 C:\Users\kentw\Desktop\git_workspace\advent_of_code_2017\15\compiled\output\netcoreapp2.0\win10-x64\hostfxr.dll
 C:\Users\kentw\Desktop\git_workspace\advent_of_code_2017\15\compiled\output\netcoreapp2.0\win10-x64\compiled.exe
