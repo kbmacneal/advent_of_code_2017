@@ -5,43 +5,39 @@ using System.Collections.Generic;
 namespace compiled {
     class Program {
         static void Main (string[] args) {
-            if (args[0] == "2") {
-                int part2 = compiled.Program.part2 ();
-                Console.WriteLine (part2);
-                return;
+            if (args.Length > 0) {
+                if (args[0] == "2") {
+                    int part2 = compiled.Program.part2 ();
+                    Console.WriteLine (part2);
+                    return;
+                }
             }
 
-            ulong factor_a = 16807;
-            ulong factor_b = 48271;
+            long factor_a = 16807;
+            long factor_b = 48271;
 
-            ulong gen_a_start = 722;
-            ulong gen_b_start = 354;
+            long gen_a_start = 722;
+            long gen_b_start = 354;
 
-            ulong shared_divisor = 2147483647;
+            long shared_divisor = 2147483647;
 
             int count = 0;
 
-            ulong last_a = gen_a_start;
-            ulong last_b = gen_b_start;
+            long last_a = gen_a_start;
+            long last_b = gen_b_start;
 
-            List<string> a_compare_list = new List<string> ();
-            List<string> b_compare_list = new List<string> ();
+            long bitmask = 65535;
 
             for (int i = 0; i < 40000000; i++) {
 
-                last_a = calc_value (last_a, factor_a, shared_divisor);
-                last_b = calc_value (last_b, factor_b, shared_divisor);
+                long temp = 0;
 
-                string a_compare = convert_to_bin (last_a);
-                string b_compare = convert_to_bin (last_b);
+                temp = calc_value (last_a, factor_a, shared_divisor);
+                last_a = temp;
+                temp = calc_value (last_b, factor_b, shared_divisor);
+                last_b = temp;
 
-                a_compare_list.Add (a_compare);
-                b_compare_list.Add (b_compare);
-
-            }
-
-            for (int i = 0; i < a_compare_list.Count; i++) {
-                if (a_compare_list[i] == b_compare_list[i]) {
+                if ((last_a & bitmask) == (last_b & bitmask)) {
                     count++;
                 }
 
@@ -51,66 +47,52 @@ namespace compiled {
 
         }
 
-        public static UInt64 calc_value (ulong value, ulong multiple, ulong divisor) {
-            System.UInt64 val = Convert.ToUInt64 ((value * multiple) % divisor);
+        public static long calc_value (long value, long multiple, long divisor) {
+            long val = Convert.ToInt64 ((value * multiple) % divisor);
 
             return val;
         }
 
-        public static string convert_to_bin (UInt64 value) {
-
-            string returner = Convert.ToString ((long) value, 2);
-
-            int padding = 0;
-            if (returner.Length < 16) {
-                padding = 16 - (returner.Length);
-                string pad = new string ('0', padding);
-                returner = pad.ToString () + returner;
-            }
-
-            returner = returner.Substring ((returner.Length - 16), 16);
-
-            return returner;
-
-        }
-
         public static int part2 () {
-            ulong factor_a = 16807;
-            ulong factor_b = 48271;
+            long factor_a = 16807;
+            long factor_b = 48271;
 
-            ulong gen_a_start = 722;
-            ulong gen_b_start = 354;
+            long gen_a_start = 722;
+            long gen_b_start = 354;
 
-            ulong shared_divisor = 2147483647;
+            long shared_divisor = 2147483647;
 
             int count = 0;
 
-            ulong last_a = gen_a_start;
-            ulong last_b = gen_b_start;
+            long last_a = gen_a_start;
+            long last_b = gen_b_start;
 
-            List<string> a_compare_list = new List<string> ();
-            List<string> b_compare_list = new List<string> ();
+            long bitmask = 65535;
+
+            List<long> list_a = new List<long> ();
+            List<long> list_b = new List<long> ();
 
             for (int i = 0; i < 5000000; i++) {
 
-                last_a = calc_value (last_a, factor_a, shared_divisor);
-                last_b = calc_value (last_b, factor_b, shared_divisor);
+                long temp = 0;
 
-                if (last_a % (ulong) 4 == 0) {
-                    string a_compare = convert_to_bin (last_a);
-                    a_compare_list.Add (a_compare);
+                temp = calc_value (last_a, factor_a, shared_divisor);
+                last_a = temp;
+                temp = calc_value (last_b, factor_b, shared_divisor);
+                last_b = temp;
+
+                if (last_a % 4 == 0) {
+                    list_a.Add (last_a);
                 }
 
-                if (last_b % (ulong) 8 == 0) {
-                    string b_compare = convert_to_bin (last_b);
-                    b_compare_list.Add (b_compare);
+                if (last_b % 8 == 0) {
+                    list_b.Add (last_b);
                 }
 
-            }
-
-            for (int i = 0; i < a_compare_list.Count; i++) {
-                if (a_compare_list[i] == b_compare_list[i]) {
-                    count++;
+                for (int j = 0; j < list_a.Count && j < list_b.Count; j++) {
+                    if ((list_a[j] & bitmask) == (list_b[j] & bitmask)) {
+                        count++;
+                    }
                 }
 
             }
