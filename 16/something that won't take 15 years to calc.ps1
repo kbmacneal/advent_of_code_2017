@@ -1,4 +1,4 @@
-function part1($programs, $inputs) {
+function perform_dance($programs, $inputs) {
     
     
     foreach ($command in $inputs) {
@@ -61,15 +61,45 @@ $inputs = (Get-Content .\input.txt) -split ","
 
 $letters = [char[]]([char]'a'..[char]'p')
 
-$programs = New-Object System.Collections.ArrayList
-
 for ($i = 0; $i -lt 16; $i++) {
     $programs += $letters[$i]
 }
 
-for ($i = 0; $i -lt 1000000000; $i++) {
+$known_states = New-Object 'System.Collections.Generic.List[Array]'
+
+$end = 1000000000
+
+
+<#for ($i = 0; $i -lt $end; $i++) {
+
     $i
-    $programs = part1 -programs $programs -inputs $inputs
+    if ($programs -in $known_states -and $($known_states[$end % $i + 1])) {
+        
+        $programs = $known_states[$end % $i]
+    }
+    else {
+        $programs = perform_dance -programs $programs -inputs $inputs
+        [void]$known_states.Add($programs)
+    }
+    
+}#>
+
+$iteration = for ($i = 0; $i -lt $end; $i++) {
+
+    $programs = perform_dance -programs $programs -inputs $inputs
+    if ($programs -in $known_states) {
+        return $i
+    }
+    [void]$known_states.Add($programs)
+
 }
 
-return $programs -join ""
+$iteration
+
+$cycles_remaining = $end % $iteration
+$end_index = $iteration - $cycles_remaining
+$programs = $known_states[$end_index]
+
+return $programs
+
+#bfcdeakhijmlgopn
