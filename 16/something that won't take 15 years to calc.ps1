@@ -65,33 +65,22 @@ for ($i = 0; $i -lt 16; $i++) {
     $programs += $letters[$i]
 }
 
-$known_states = New-Object 'System.Collections.Generic.List[Array]'
+$known_states = New-Object 'System.Collections.Generic.List[string]'
+
+[void]$known_states.Add($($programs -join ""))
 
 $end = 1000000000
 
-$iteration = for ($i = 0; $i -lt $end; $i++) {
-    
-    $programs = perform_dance -programs $programs -inputs $inputs
-    if ($programs -in $known_states -and $i -ne $end) {
-        return $i
-    }
-    if ($i -eq 19600) {
-        return 0
-    }
-    [void]$known_states.Add($programs)
+for ($i = 0; $i -lt $end; $i++) {
     write-host $i
+    $programs = perform_dance -programs $programs -inputs $inputs
+    if ($($programs -join "") -in $known_states) {
+        [int]$index = $($end % ($i+1))
+        
+        return $known_states[$index] 
+    }
+    [void]$known_states.Add($($programs -join ""))
+    
 }
-
-$iteration
-
-if ($iteration -eq 0) {
-    return $programs
-}
-
-$cycles_remaining = $end % $iteration
-$end_index = $iteration - $cycles_remaining
-$programs = $known_states[$end_index]
-
-return $programs
 
 #bfcdeakhijmlgopn
