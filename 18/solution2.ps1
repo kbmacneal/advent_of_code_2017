@@ -15,8 +15,6 @@ class program
 	run($reg, $send)
 	{
 		do_commands -registers $reg -sender $send
-		#$scriptblock = {do_commands -registers $reg -sender $send}
-		#Start-Job -ScriptBlock $scriptblock
 	}
 }
 
@@ -253,19 +251,6 @@ $Global:program2.input_queue = New-Object System.collections.queue
 $Global:program2.program_id = 1
 $Global:program2.registers["p"] = 1
 
-<#$scriptblock = {
-	$Global:program1.run($Global:program1.registers,1)
-}
-start-job -ScriptBlock $scriptblock -name "Program1"
-
-$scriptblock = {
-	$Global:program2.run($Global:program2.registers,2)
-}
-
-start-job -ScriptBlock $scriptblock -name "Program2"
-
-Wait-Job -Name "Program1"
-return $Global:program1.send_count#>
 
 $Global:program1.locked = $true
 

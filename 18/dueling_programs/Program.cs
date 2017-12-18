@@ -6,7 +6,7 @@ using System.IO;
 namespace dueling_programs {
     class Program {
         static void Main (string[] args) {
-            string[] instructions = File.ReadAllLines ("C:\\advent_of_code_2017\\18\\input.txt");
+            string[] instructions = File.ReadAllLines ("C:\\advent_of_code_2017\\18\\input_test_2.txt");
 
             var p0 = new Program (0, instructions);
             var p1 = new Program (1, instructions);

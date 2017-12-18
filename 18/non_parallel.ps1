@@ -1,3 +1,5 @@
+#after reding this https://github.com/PowerShell/PowerShell/issues/3651 it may not be possible to code this in powershell due to class methods running serially insttead of concurrently. run dotnet run on the dueling_programs directory to get the answer, but at this point it looks like its not possible in powershell to run methods concurrently
+
 class command
 {
 	[string]$command;
@@ -5,196 +7,204 @@ class command
 	[string]$value;
 }
 
-class program
+class Program
 {
-	[HashTable]$registers = @{};
-	[system.collections.queue]$input_queue;
+	[HashTable]$regs = @{};
+	[system.collections.queue]$queue;
+	[system.collections.queue]$otherqueue;
 	[int]$program_id;
 	[int]$send_count = 0;
-	[bool]$locked = $false;
-}
-
-function snd($registers, $command, $sender)
-{ 
-	#$last_frequency = [long]$registers[$($command.register)]
-	if ($sender -eq 1)
+	run()
  {
-		$parse_test = 0
-		
-		$program1.send_count++
-		if ([Int64]::TryParse($($command.register), [ref]$parse_test))
+
+		$registers = $this.regs
+
+		$inputs = get-content .\input_test_2.txt
+
+		$command_array = new-object system.collections.arraylist
+	
+
+		foreach ($command in $inputs)
 		{
-			$program2.input_queue.enqueue($($command.register))
+			$obj = New-Object -TypeName command
+			$arr = $command -split " "
+
+			$obj.command = $arr[0]
+			$obj.register = $arr[1]
+
+			if ($arr.count -gt 2)
+			{
+				$obj.value = $arr[2]
+			}
+			$command_array += $obj
 		}
-		else 
+
+		for ($i = 0; $i -lt $command_array.Count; $i++)
 		{
-			$program2.input_queue.enqueue($([long]$registers[$($command.register)]))
-			#$registers[$($command.register)] = [long]$registers[$($command.value)]
-		}
+	 
+			$command = $command_array[$i]
+
+			if (!($registers[$($command.register)]))
+			{
+				$parse_test = 0
+
+				if ([Int64]::TryParse($($command.register), [ref]$parse_test))
+				{
+
+				}
+				else 
+				{
+					$registers[$($command.register)] = 0
+				}
+			
+			}
+
+			switch ($($command.command))
+			{
+				"snd"
+				{ 
+					$parse_test = 0
+
+					$this.send_count++
+					if ([Int64]::TryParse($($command.register), [ref]$parse_test))
+					{
+						$this.otherqueue.Enqueue($($command.register))
+					}
+					else 
+					{
+						$this.otherqueue.Enqueue($([long]$registers[$($command.register)]))
+					}
 					
-	}
-	else
- {
-		$parse_test = 0
-		
-		$program2.send_count++
-		if ([Int64]::TryParse($($command.register), [ref]$parse_test))
-		{
-			$program1.input_queue.enqueue($($command.register))
-		}
-		else 
-		{
-			$program1.input_queue.enqueue($([long]$registers[$($command.register)]))
-			#$registers[$($command.register)] = [long]$registers[$($command.value)]
-		}
-	}
-}
-function set ($registers, $command, $sender)
-{ 
+					
+				}
+				"set"
+				{ 
 
-	$parse_test = 0
+					$parse_test = 0
 
-	if ([Int64]::TryParse($($command.value), [ref]$parse_test))
- {
-		$registers[$($command.register)] = [long]($command.value)
-	}
-	else 
- {
-		$registers[$($command.register)] = [long]$registers[$($command.value)]
-	}
+					if ([Int64]::TryParse($($command.value), [ref]$parse_test))
+					{
+						$registers[$($command.register)] = [long]($command.value)
+					}
+					else 
+					{
+						$registers[$($command.register)] = [long]$registers[$($command.value)]
+					}
 
 
 			
-}
-function add ($registers, $command, $sender)
-{ 
-	$registers[$($command.register)] = $registers[$($command.register)] + [long]$command.value
-}
-function mul($registers, $command, $sender)
-{ 
+				}
+				"add"
+				{ 
+					$registers[$($command.register)] = $registers[$($command.register)] + [long]$command.value
+				}
+				"mul"
+				{ 
 
-	$parse_test = 0
+					$parse_test = 0
 
-	if ([Int64]::TryParse($($command.value), [ref]$parse_test))
- {
-		$registers[$($command.register)] = [long]$registers[$($command.register)] * $($command.value)
-	}
-	else 
- {
-		$registers[$($command.register)] = [long]$registers[$($command.register)] * [long]$registers[$($command.value)]
-	}
-
-			
-}
-function mod($registers, $command, $sender)
-{
-	$parse_test = 0
-
-	if ([Int64]::TryParse($($command.value), [ref]$parse_test))
- {
-		$registers[$($command.register)] = [long]$registers[$($command.register)] % [long]$($command.value)
-	}
-	else 
- {
-		$registers[$($command.register)] = [long]$registers[$($command.register)] % [long]$registers[$($command.value)]
-	}
-
+					if ([Int64]::TryParse($($command.value), [ref]$parse_test))
+					{
+						$registers[$($command.register)] = [long]$registers[$($command.register)] * $($command.value)
+					}
+					else 
+					{
+						$registers[$($command.register)] = [long]$registers[$($command.register)] * [long]$registers[$($command.value)]
+					}
 
 			
-}
-function rcv($registers, $command, $sender)
-{
-	if ($sender -eq 1)
- {
-		if ($program1.input_queue.Count -gt 0)
-		{
-			$registers[$($command.register)] = [long]$($command.value)
-		}
-		else
-		{
-			$program1.locked = $true
-		}
-	}
-	else
-	{
-		if ($program2.input_queue.Count -gt 0)
-		{
-			$registers[$($command.register)] = [long]$($command.value)
-		}
-		else
-		{
-			$program2.locked = $true
-		}
-	}
-	
-}
-function jgz 
-{ 
-	$parse_test = 0
+				}
+				"mod"
+				{
+					$parse_test = 0
 
-	if ([Int64]::TryParse($($command.register), [ref]$parse_test))
- {
-		if ([long]$($command.register) -gt 0)
-		{
-			$i = $i + [long]$command.value - 1 
-		}
-	}
-	else 
- {
-		if ([long]$registers[$($command.register)] -gt 0)
-		{
-			$i = $i + $registers[$($command.register)] - 1
-		}
-	}
+					if ([Int64]::TryParse($($command.value), [ref]$parse_test))
+					{
+						$registers[$($command.register)] = [long]$registers[$($command.register)] % [long]$($command.value)
+					}
+					else 
+					{
+						$registers[$($command.register)] = [long]$registers[$($command.register)] % [long]$registers[$($command.value)]
+					}
+
+
+			
+				}
+				"rcv"
+				{
+					if ($this.queue.Count -gt 0)
+					{
+						$registers[$($command.register)] = [long]$this.queue.Dequeue()
+					}
+					else
+					{
+						return
+					}
+					
+					
+				}
+				"jgz"
+				{ 
+					$parse_test = 0
+
+					if ([Int64]::TryParse($($command.register), [ref]$parse_test))
+					{
+						if ([long]$($command.register) -gt 0)
+						{
+							$i = $i + [long]$command.value - 1 
+						}
+					}
+					else 
+					{
+						if ([long]$registers[$($command.register)] -gt 0)
+						{
+							$i = $i + $registers[$($command.register)] - 1
+						}
+					}
 
 					
+				}
+
+				Default {}
+			}
+
+
+		}
+	}
 }
 
-$inputs = get-content .\input.txt
+Import-Module -Name .\CreateClassInstanceHelper.psm1
 
-$command_array = new-object system.collections.arraylist
+$Global:program1 = New-UnboundClassInstance -type program -arguments $null
+#$Global:Global:program1 = New-Object -TypeName program
+$Global:program1.regs = @{}
+$Global:program1.queue = New-Object System.collections.queue
+$Global:program1.program_id = 0
+$Global:program1.regs["p"] = 0
 
-$programs = @()
+$Global:program2 = New-UnboundClassInstance -type program -arguments $null
+#$Global:program2 = New-Object -TypeName program
+$Global:program2.regs = @{}
+$Global:program2.queue = New-Object System.collections.queue
+$Global:program2.program_id = 1
+$Global:program2.regs["p"] = 1
+
+
+$Global:program1.otherqueue = $Global:program2.queue
+$Global:program2.otherqueue = $Global:program1.queue
+
+
+
+do
+{
+	#[System.Windows.Threading.Dispatcher]::InvokeAsync($program1.run())
+	#[System.Windows.Threading.Dispatcher]::InvokeAsync($program2.run())
+	$Global:program2.run()
+	$Global:program1.run()
 	
 
-foreach ($command in $inputs)
-{
-	$obj = New-Object -TypeName command
-	$arr = $command -split " "
+} while ($Global:program2.queue.Count -ne 0)
 
-	$obj.command = $arr[0]
-	$obj.register = $arr[1]
-
-	if ($arr.count -gt 2)
- {
-		$obj.value = $arr[2]
-	}
-	$command_array += $obj
-}
-
-
-$program1 = New-Object -TypeName program
-$program1.registers = @{}
-$program1.input_queue = New-Object System.collections.queue
-$program1.program_id = 0
-$program1.registers["p"] = 0
-
-$program2 = New-Object -TypeName program
-$program2.registers = @{}
-$program2.input_queue = New-Object System.collections.queue
-$program2.program_id = 1
-$program2.registers["p"] = 1
-
-$programs += $program1
-$programs += $program2
-
-foreach ($command in $command_array)
-{
-	foreach ($program in $programs) {
-		
-	}
-	
-}
-
-
-return $program2.send_count
+#$program1 | Format-List
+#$program2 | Format-List
+return $Global:program1.send_count
