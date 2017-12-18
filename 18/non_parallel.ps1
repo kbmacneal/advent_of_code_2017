@@ -19,7 +19,7 @@ class Program {
 
         $this.send_count++
         if ([Int64]::TryParse($($command.register), [ref]$parse_test)) {
-            $this.otherqueue.Enqueue($($command.register))
+            $this.otherqueue.Enqueue([long]$($command.register))
         }
         else {
             $this.otherqueue.Enqueue($([long]$registers[$($command.register)]))
@@ -96,7 +96,7 @@ class Program {
 }
 
 
-$inputs = get-content .\input_test_2.txt
+$inputs = get-content .\input.txt
 
 $command_array = new-object system.collections.arraylist
 	
@@ -135,11 +135,23 @@ $program2.otherqueue = $program1.queue
 $position1 = 0
 $position2 = 0
 
+foreach($command in $command_array)
+{
+	if(!($program1.regs[$command.register]) -and $command.register -match "[a-z]")
+	{
+		$program1.regs[$command.register] = 0
+	}
+	if(!($program2.regs[$command.register]) -and $command.register -match "[a-z]")
+	{
+		$program2.regs[$command.register] = 0
+	}
+}
+
 do {
     $command1 = $command_array[$position1]
     $command2 = $command_array[$position2]
 
-    switch ($command1) {
+    switch ($command1.command) {
         "set" { 
             $program1.set($command1)
         }
@@ -164,7 +176,7 @@ do {
         Default {}
     }
 
-    switch ($command2) {
+    switch ($command2.command) {
         "set" { 
             $program2.set($command2)
         }
@@ -196,9 +208,7 @@ do {
         $position2++
 	}
 	
-	write-host $position1
 
-
-} until ($program1.locked -eq $true -and $program2.locked -eq $true)
+} until (($program1.locked -eq $true -and $program2.locked -eq $true))
 
 return $program1.send_count
