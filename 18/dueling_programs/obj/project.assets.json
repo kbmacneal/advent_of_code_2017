@@ -664,23 +664,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Kenneth MacNeal\\.nuget\\packages\\": {},
+    "C:\\Users\\kentw\\.nuget\\packages\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\advent_of_code_2017\\18\\dueling_programs\\dueling_programs.csproj",
+      "projectUniqueName": "c:\\Users\\kentw\\Desktop\\git_workspace\\advent_of_code_2017\\18\\dueling_programs\\dueling_programs.csproj",
       "projectName": "dueling_programs",
-      "projectPath": "C:\\advent_of_code_2017\\18\\dueling_programs\\dueling_programs.csproj",
-      "packagesPath": "C:\\Users\\Kenneth MacNeal\\.nuget\\packages\\",
-      "outputPath": "C:\\advent_of_code_2017\\18\\dueling_programs\\obj\\",
+      "projectPath": "c:\\Users\\kentw\\Desktop\\git_workspace\\advent_of_code_2017\\18\\dueling_programs\\dueling_programs.csproj",
+      "packagesPath": "C:\\Users\\kentw\\.nuget\\packages\\",
+      "outputPath": "c:\\Users\\kentw\\Desktop\\git_workspace\\advent_of_code_2017\\18\\dueling_programs\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\Kenneth MacNeal\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\kentw\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp2.0"
