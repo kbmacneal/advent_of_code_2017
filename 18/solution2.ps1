@@ -71,6 +71,7 @@ function do_commands($registers, $sender)
 				if ($sender -eq 1)
 				{
 					$parse_test = 0
+					Write-Host "program 1 sending"
 					$Global:program1.send_count++
 					if ([Int64]::TryParse($($command.register), [ref]$parse_test))
 					{
@@ -86,6 +87,7 @@ function do_commands($registers, $sender)
 				else
 				{
 					$parse_test = 0
+					Write-Host "program 2 sending"
 					$Global:program2.send_count++
 					if ([Int64]::TryParse($($command.register), [ref]$parse_test))
 					{
@@ -222,7 +224,7 @@ function do_commands($registers, $sender)
 				{
 					if ([long]$registers[$($command.register)] -gt 0)
 					{
-						$i = $i + [long]$command.value - 1
+						$i = $i + $registers[$($command.register)] - 1
 					}
 				}
 
@@ -251,7 +253,7 @@ $Global:program2.input_queue = New-Object System.collections.queue
 $Global:program2.program_id = 1
 $Global:program2.registers["p"] = 1
 
-$scriptblock = {
+<#$scriptblock = {
 	$Global:program1.run($Global:program1.registers,1)
 }
 start-job -ScriptBlock $scriptblock -name "Program1"
@@ -263,4 +265,9 @@ $scriptblock = {
 start-job -ScriptBlock $scriptblock -name "Program2"
 
 Wait-Job -Name "Program1"
-return $Global:program1.send_count
+return $Global:program1.send_count#>
+
+$Global:program1.locked = $true
+
+$Global:program2.run($Global:program2.registers,2)
+return $Global:program2.send_count
