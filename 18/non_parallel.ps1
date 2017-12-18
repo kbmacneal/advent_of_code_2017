@@ -14,7 +14,7 @@ class Program
 	[system.collections.queue]$otherqueue;
 	[int]$program_id;
 	[int]$send_count = 0;
-	run()
+	 run()
  {
 
 		$registers = $this.regs
@@ -138,6 +138,7 @@ class Program
 					}
 					else
 					{
+						
 						return
 					}
 					
@@ -170,20 +171,21 @@ class Program
 
 
 		}
+
 	}
 }
 
-Import-Module -Name .\CreateClassInstanceHelper.psm1
+#Import-Module -Name .\CreateClassInstanceHelper.psm1
 
-$Global:program1 = New-UnboundClassInstance -type program -arguments $null
-#$Global:Global:program1 = New-Object -TypeName program
+#$Global:program1 = New-UnboundClassInstance -type program -arguments $null
+$Global:Global:program1 = New-Object -TypeName program
 $Global:program1.regs = @{}
 $Global:program1.queue = New-Object System.collections.queue
 $Global:program1.program_id = 0
 $Global:program1.regs["p"] = 0
 
-$Global:program2 = New-UnboundClassInstance -type program -arguments $null
-#$Global:program2 = New-Object -TypeName program
+#$Global:program2 = New-UnboundClassInstance -type program -arguments $null
+$Global:program2 = New-Object -TypeName program
 $Global:program2.regs = @{}
 $Global:program2.queue = New-Object System.collections.queue
 $Global:program2.program_id = 1
@@ -195,16 +197,12 @@ $Global:program2.otherqueue = $Global:program1.queue
 
 
 
-do
-{
-	#[System.Windows.Threading.Dispatcher]::InvokeAsync($program1.run())
-	#[System.Windows.Threading.Dispatcher]::InvokeAsync($program2.run())
-	$Global:program2.run()
-	$Global:program1.run()
+do {
+	start-job -scriptblock {$_.run()} -InputObject $Global:program2
+	start-job -scriptblock {$_.run()} -InputObject $Global:program1
+} while ($Global:program2.queue.count -ne 0)
+
+
+
 	
-
-} while ($Global:program2.queue.Count -ne 0)
-
-#$program1 | Format-List
-#$program2 | Format-List
-return $Global:program1.send_count
+write-host $Global:program1.send_count
