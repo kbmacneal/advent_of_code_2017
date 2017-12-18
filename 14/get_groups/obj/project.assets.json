@@ -1,5 +1,5 @@
 {
-  "version": 2,
+  "version": 3,
   "targets": {
     ".NETCoreApp,Version=v2.0": {
       "Microsoft.NETCore.App/2.0.0": {
@@ -194,7 +194,7 @@
           "lib/netstandard1.0/_._": {}
         },
         "build": {
-          "build/NETStandard.Library.targets": {}
+          "build/netstandard2.0/NETStandard.Library.targets": {}
         }
       }
     }
@@ -664,27 +664,40 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\kentw\\.nuget\\packages\\": {}
+    "C:\\Users\\Kenneth MacNeal\\.nuget\\packages\\": {},
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "c:\\Users\\kentw\\Desktop\\git_workspace\\advent_of_code_2017\\14\\get_groups\\get_groups.csproj",
+      "projectUniqueName": "c:\\advent_of_code_2017\\14\\get_groups\\get_groups.csproj",
       "projectName": "get_groups",
-      "projectPath": "c:\\Users\\kentw\\Desktop\\git_workspace\\advent_of_code_2017\\14\\get_groups\\get_groups.csproj",
-      "outputPath": "c:\\Users\\kentw\\Desktop\\git_workspace\\advent_of_code_2017\\14\\get_groups\\obj\\",
+      "projectPath": "c:\\advent_of_code_2017\\14\\get_groups\\get_groups.csproj",
+      "packagesPath": "C:\\Users\\Kenneth MacNeal\\.nuget\\packages\\",
+      "outputPath": "c:\\advent_of_code_2017\\14\\get_groups\\obj\\",
       "projectStyle": "PackageReference",
       "crossTargeting": true,
+      "fallbackFolders": [
+        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+      ],
+      "configFilePaths": [
+        "C:\\Users\\Kenneth MacNeal\\AppData\\Roaming\\NuGet\\NuGet.Config"
+      ],
       "originalTargetFrameworks": [
         "netcoreapp2.0"
       ],
-      "files": {
-        "lib/netcoreapp2.0/get_groups.dll": "c:\\Users\\kentw\\Desktop\\git_workspace\\advent_of_code_2017\\14\\get_groups\\bin\\placeholder\\netcoreapp2.0\\get_groups.dll"
+      "sources": {
+        "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "netcoreapp2.0": {
           "projectReferences": {}
         }
+      },
+      "warningProperties": {
+        "warnAsError": [
+          "NU1605"
+        ]
       }
     },
     "frameworks": {
@@ -692,9 +705,15 @@
         "dependencies": {
           "Microsoft.NETCore.App": {
             "target": "Package",
-            "version": "2.0"
+            "version": "[2.0.0, )",
+            "autoReferenced": true
           }
-        }
+        },
+        "imports": [
+          "net461"
+        ],
+        "assetTargetFallback": true,
+        "warn": true
       }
     }
   }
