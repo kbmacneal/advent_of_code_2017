@@ -14,6 +14,11 @@ class Program {
     [bool]$locked = $false
     [int]$send_count = 0;
     [int]$position = 0;
+    [System.Collections.ArrayList]$command_list;
+    run()
+    {
+        $this.execute_next($this.command_list)
+    }
     snd($command) {
         $parse_test = 0
         $registers = $this.regs
@@ -80,16 +85,42 @@ class Program {
 
         $parse_test = 0
 
-        if ([Int64]::TryParse($($command.register), [ref]$parse_test)) {
+        if([long]::TryParse($($command.value), [ref]$parse_test))
+        {
+            if([long]::TryParse($($command.register), [ref]$parse_test))
+            {
+                if([long]$command.register -gt 0)
+                {
+                    $i = $i + $command.value -1
+                }
+            }
+            else {
+                if($registers[$($command.register)] -gt 0)
+                {
+                    $i = $i + [long]$command.value - 1
+                }
+
+            }
+        }
+        else{
+            if ($registers[$command.register] -gt 0) {
+                
+            }
+            $i = $i + [long]$registers[$command.value] -1
+        }
+
+        <#if ([Int64]::TryParse($($command.register), [ref]$parse_test)) {
             if ([long]$($command.register) -gt 0) {
-                $i = $i + [long]$command.value 
+                $i = $i + [long]$command.value -1
             }
         }
         else {
-            if ([long]$registers[$($command.value)] -gt 0) {
-                $i = $i + $registers[$($command.value)]
+            if ([long]$registers[$($command.register)] -gt 0) {
+
+                #3+17-1
+                $i = $i + $registers[$($command.value)] - 1
             }
-        }
+        }#>
 
         return $i
     }
@@ -98,7 +129,9 @@ class Program {
             $this.locked = $true
         }
 
-        $command = $command_list[[int]$this.position]
+        $pos = [int]$this.position
+
+        $command = $command_list[$pos]
 
         switch ($command.command) {
             "set" { 
@@ -185,7 +218,7 @@ foreach ($command in $command_array) {
 }
 $count = 0
 
-while ($true) {
+<#while ($true) {
     
     $count++
 
@@ -196,4 +229,19 @@ while ($true) {
         return $program1.send_count
     }
 	
-}
+}#>
+
+$program1.command_list = $command_array
+$program2.command_list = $command_array
+
+do {
+    
+write-host $program1.command_list[$program1.position]
+
+    $program1.run()
+    $program2.run()
+
+    
+
+} until ($program1.locked -and $program2.locked)
+return $program1.send_count
