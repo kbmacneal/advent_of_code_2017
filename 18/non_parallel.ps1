@@ -82,12 +82,12 @@ class Program {
 
         if ([Int64]::TryParse($($command.register), [ref]$parse_test)) {
             if ([long]$($command.register) -gt 0) {
-                $i = $i + [long]$command.value - 1 
+                $i = $i + [long]$command.value 
             }
         }
         else {
             if ([long]$registers[$($command.value)] -gt 0) {
-                $i = $i + $registers[$($command.value)] - 1
+                $i = $i + $registers[$($command.value)]
             }
         }
 
@@ -98,7 +98,7 @@ class Program {
             $this.locked = $true
         }
 
-        $command = $command_list[$($this.position)]
+        $command = $command_list[[int]$this.position]
 
         switch ($command.command) {
             "set" { 
