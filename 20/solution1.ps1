@@ -81,7 +81,7 @@ foreach ($particle in $particles) {do_manhattan_dist -particle $particle}
 $part1 = $particles | sort -Property total_acc,total_vel,man_dist | select -first 1
 
 
-$particles | Sort-Object -Property @{Expression = {$_.total_acc}; Descending = $true},@{Expression = {$_.total_vel}; Descending = $true} | select -First 1
+$particles | Sort-Object -Property @{Expression = {$_.total_acc}; Descending = $false},@{Expression = {$_.total_vel}; Descending = $false} | select -First 1
 
 #Sort-Object -Property @{Expression = {$_.Major}; Descending = $true}, @{Expression = {$_.Minor} ;Descending = $true}, @{Expression = {$_.Bugfix}; Descending=$true})
 
