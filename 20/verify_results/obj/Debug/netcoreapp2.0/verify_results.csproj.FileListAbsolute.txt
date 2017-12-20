@@ -1,0 +1,10 @@
+C:\advent_of_code_2017\20\verify_results\obj\Debug\netcoreapp2.0\verify_results.csproj.CoreCompileInputs.cache
+C:\advent_of_code_2017\20\verify_results\obj\Debug\netcoreapp2.0\verify_results.AssemblyInfoInputs.cache
+C:\advent_of_code_2017\20\verify_results\obj\Debug\netcoreapp2.0\verify_results.AssemblyInfo.cs
+C:\advent_of_code_2017\20\verify_results\bin\Debug\netcoreapp2.0\verify_results.deps.json
+C:\advent_of_code_2017\20\verify_results\bin\Debug\netcoreapp2.0\verify_results.runtimeconfig.json
+C:\advent_of_code_2017\20\verify_results\bin\Debug\netcoreapp2.0\verify_results.runtimeconfig.dev.json
+C:\advent_of_code_2017\20\verify_results\bin\Debug\netcoreapp2.0\verify_results.dll
+C:\advent_of_code_2017\20\verify_results\bin\Debug\netcoreapp2.0\verify_results.pdb
+C:\advent_of_code_2017\20\verify_results\obj\Debug\netcoreapp2.0\verify_results.dll
+C:\advent_of_code_2017\20\verify_results\obj\Debug\netcoreapp2.0\verify_results.pdb
