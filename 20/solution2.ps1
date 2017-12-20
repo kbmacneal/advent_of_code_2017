@@ -80,18 +80,44 @@ foreach ($particle in $particles) {do_manhattan_dist -particle $particle}
 
 $part1 = $particles | sort -Property total_acc,total_vel,man_dist | select -first 1
 
+$part1 | fl
 
-$particles | Sort-Object -Property @{Expression = {$_.total_acc}; Descending = $true},@{Expression = {$_.total_vel}; Descending = $true} | select -First 1
+#$closest_distance = 1000000000
 
-#Sort-Object -Property @{Expression = {$_.Major}; Descending = $true}, @{Expression = {$_.Minor} ;Descending = $true}, @{Expression = {$_.Bugfix}; Descending=$true})
+$tick = 0
 
-<#
-Sort-Object -Property @{Expression={$_.Major}; Descending=$true}, @{Expression={$_.Minor} ;Descending=$true}, @{Expression={$_.Bugfix}; Descending=$true})
+while ($tick -lt 100)
+{
+	
+	foreach ($particle in $particles)
+ {
+	
+		do_accellerate -particle $particle
+		do_move -particle $particle
+		do_manhattan_dist -particle $particle
+		
+	}
 
-# use a calculated field and set the Ascending attribute to False
-$ARRAY | Sort-Object -Property @{Expression = {$_.PROP_A}; Ascending = $false}, PROP_B
+	$tick++
 
+	$collisions = $particles | Group-Object -Property position_x,position_y,position_z | where -Property count -gt 1
 
-# short version
-$ARRAY | sort @{e={$_.PROP_A}; a=0}, PROP_B
-#>
+	#$current_closest = ($particles.man_dist | Measure-Object -Minimum).Minimum
+
+	$newmin = $particles | sort -Property man_dist | select -First 1
+	
+
+	if ($newMin -ne $minParticle)
+ {
+		$minParticle = $newMin;
+	}
+	$tick++
+				
+	<#if ($current_closest -gt $closest_distance)
+ {
+		return $closest_object
+	}#>
+
+}
+
+return $particles | sort -Property total_distance | select -First 1
