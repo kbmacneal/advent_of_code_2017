@@ -61,11 +61,11 @@ foreach ($part in $inputs)
 	$particle.position_y = ($part_array[0] -split ",")[1]
 	$particle.position_z = ($part_array[0] -split ",")[2]
 	$particle.vel_x = ($part_array[1] -split ",")[0]
-	$particle.vel_y = ($part_array[0] -split ",")[1]
-	$particle.vel_z = ($part_array[0] -split ",")[2]
+	$particle.vel_y = ($part_array[1] -split ",")[1]
+	$particle.vel_z = ($part_array[1] -split ",")[2]
 	$particle.acc_x = ($part_array[2] -split ",")[0]
-	$particle.acc_y = ($part_array[0] -split ",")[1]
-	$particle.acc_z = ($part_array[0] -split ",")[2]
+	$particle.acc_y = ($part_array[2] -split ",")[1]
+	$particle.acc_z = ($part_array[2] -split ",")[2]
 	$particle.index = $index
 
 	$particle.total_acc = [Math]::Abs($particle.acc_x) + [Math]::Abs($particle.acc_y) + [Math]::Abs($particle.acc_z)
@@ -78,46 +78,25 @@ foreach ($part in $inputs)
 }
 foreach ($particle in $particles) {do_manhattan_dist -particle $particle}
 
-$part1 = $particles | sort -Property total_acc,total_vel,man_dist | select -first 1
-
-$part1 | fl
-
-#$closest_distance = 1000000000
-
 $tick = 0
 
-while ($tick -lt 100)
+while($tick -lt 1000)
 {
-	
-	foreach ($particle in $particles)
- {
-	
+	foreach ($particle in $($particles | where collided -eq $false)) {
+		
 		do_accellerate -particle $particle
 		do_move -particle $particle
 		do_manhattan_dist -particle $particle
-		
+	}
+
+
+	$collisions = $particles | Group-Object -Property position_x,position_y,position_z | Where-Object count -gt 1
+
+	foreach ($collision in $collisions) {
+		$collision.group | % {$_.collided = $true}
 	}
 
 	$tick++
-
-	$collisions = $particles | Group-Object -Property position_x,position_y,position_z | where -Property count -gt 1
-
-	#$current_closest = ($particles.man_dist | Measure-Object -Minimum).Minimum
-
-	$newmin = $particles | sort -Property man_dist | select -First 1
-	
-
-	if ($newMin -ne $minParticle)
- {
-		$minParticle = $newMin;
-	}
-	$tick++
-				
-	<#if ($current_closest -gt $closest_distance)
- {
-		return $closest_object
-	}#>
-
 }
 
-return $particles | sort -Property total_distance | select -First 1
+return ($particles | where collided -eq $false).count

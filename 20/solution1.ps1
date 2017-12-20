@@ -61,11 +61,11 @@ foreach ($part in $inputs)
 	$particle.position_y = ($part_array[0] -split ",")[1]
 	$particle.position_z = ($part_array[0] -split ",")[2]
 	$particle.vel_x = ($part_array[1] -split ",")[0]
-	$particle.vel_y = ($part_array[0] -split ",")[1]
-	$particle.vel_z = ($part_array[0] -split ",")[2]
+	$particle.vel_y = ($part_array[1] -split ",")[1]
+	$particle.vel_z = ($part_array[1] -split ",")[2]
 	$particle.acc_x = ($part_array[2] -split ",")[0]
-	$particle.acc_y = ($part_array[0] -split ",")[1]
-	$particle.acc_z = ($part_array[0] -split ",")[2]
+	$particle.acc_y = ($part_array[2] -split ",")[1]
+	$particle.acc_z = ($part_array[2] -split ",")[2]
 	$particle.index = $index
 
 	$particle.total_acc = [Math]::Abs($particle.acc_x) + [Math]::Abs($particle.acc_y) + [Math]::Abs($particle.acc_z)
@@ -80,18 +80,7 @@ foreach ($particle in $particles) {do_manhattan_dist -particle $particle}
 
 $part1 = $particles | sort -Property total_acc,total_vel,man_dist | select -first 1
 
+return $part1.index
 
-$particles | Sort-Object -Property @{Expression = {$_.total_acc}; Descending = $false},@{Expression = {$_.total_vel}; Descending = $false} | select -First 1
+#$particles | Sort-Object -Property @{Expression = {[Math]::Abs($_.acc_x) + [System.Math]::Abs($_.acc_y) + [Math]::Abs($_.acc_z)}; Ascending = $true; Descending = $false},@{Expression = {[Math]::Abs($_.vel_x) + [System.Math]::Abs($_.vel_y) + [Math]::Abs($_.vel_z)}; Ascending = $true; Descending = $false} | select -Property index -First 1
 
-#Sort-Object -Property @{Expression = {$_.Major}; Descending = $true}, @{Expression = {$_.Minor} ;Descending = $true}, @{Expression = {$_.Bugfix}; Descending=$true})
-
-<#
-Sort-Object -Property @{Expression={$_.Major}; Descending=$true}, @{Expression={$_.Minor} ;Descending=$true}, @{Expression={$_.Bugfix}; Descending=$true})
-
-# use a calculated field and set the Ascending attribute to False
-$ARRAY | Sort-Object -Property @{Expression = {$_.PROP_A}; Ascending = $false}, PROP_B
-
-
-# short version
-$ARRAY | sort @{e={$_.PROP_A}; a=0}, PROP_B
-#>
