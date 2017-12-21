@@ -670,11 +670,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "c:\\Users\\kentw\\Desktop\\git_workspace\\advent_of_code_2017\\14\\get_groups\\get_groups.csproj",
+      "projectUniqueName": "c:\\Users\\kentw\\Desktop\\repos\\advent_of_code_2017\\14\\get_groups\\get_groups.csproj",
       "projectName": "get_groups",
-      "projectPath": "c:\\Users\\kentw\\Desktop\\git_workspace\\advent_of_code_2017\\14\\get_groups\\get_groups.csproj",
+      "projectPath": "c:\\Users\\kentw\\Desktop\\repos\\advent_of_code_2017\\14\\get_groups\\get_groups.csproj",
       "packagesPath": "C:\\Users\\kentw\\.nuget\\packages\\",
-      "outputPath": "c:\\Users\\kentw\\Desktop\\git_workspace\\advent_of_code_2017\\14\\get_groups\\obj\\",
+      "outputPath": "c:\\Users\\kentw\\Desktop\\repos\\advent_of_code_2017\\14\\get_groups\\obj\\",
       "projectStyle": "PackageReference",
       "crossTargeting": true,
       "fallbackFolders": [
