@@ -30,23 +30,20 @@ foreach ($command in $command_array) {
     }
 }
 
-$registers["a"] = 1
-
 $mul_count = 0
 
 for ($i = 0; $i -lt $command_array.Count; $i++) {
-
     $command = $command_array[$i]
-
+    
     if (!($registers[$($command.register)])) {
         $registers[$($command.register)] = 0
     }
-
+    
     switch ($($command.command)) {  
         "set" { 
-
+    
             $parse_test = 0
-
+    
             if ([Int64]::TryParse($($command.value), [ref]$parse_test)) {
                 $registers[$($command.register)] = [long]($command.value)
             }
@@ -56,7 +53,7 @@ for ($i = 0; $i -lt $command_array.Count; $i++) {
         }
         "sub" { 
             $parse_test = 0
-
+    
             if ([Int64]::TryParse($($command.value), [ref]$parse_test)) {
                 $registers[$($command.register)] = $registers[$($command.register)] - [long]$command.value
             }
@@ -65,10 +62,10 @@ for ($i = 0; $i -lt $command_array.Count; $i++) {
             }
         }
         "mul" { 
-
+    
             $parse_test = 0
             $mul_count++
-
+    
             if ([Int64]::TryParse($($command.value), [ref]$parse_test)) {
                 $registers[$($command.register)] = [long]$registers[$($command.register)] * $($command.value)
             }
@@ -78,7 +75,7 @@ for ($i = 0; $i -lt $command_array.Count; $i++) {
         }
         "jnz" { 
             $parse_test = 0
-
+    
             if ([Int64]::TryParse($($command.register), [ref]$parse_test)) {
                 if ([long]$($command.register) -ne 0) {
                     $i = $i + [long]$command.value - 1 
@@ -90,10 +87,10 @@ for ($i = 0; $i -lt $command_array.Count; $i++) {
                 }
             }			
         }
-
+    
         Default {}
     }
 }
 
-#return $mul_count
-return $registers["h"]
+
+return $mul_count
