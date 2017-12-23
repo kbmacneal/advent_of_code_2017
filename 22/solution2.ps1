@@ -55,7 +55,9 @@ class virus_carrier {
                         $this.facing_direction = "north"
                         $this.position_y++
                     }
-                    Default {}
+                    Default {
+                        write-host "stop"
+                    }
                 }
             }
             "left" { 
@@ -80,7 +82,9 @@ class virus_carrier {
                         $this.facing_direction = "south"
                         $this.position_y--
                     }
-                    Default {}
+                    Default {
+                        write-host "stop"
+                    }
                 }
             }
             "reverse" { 
@@ -105,7 +109,9 @@ class virus_carrier {
                         $this.facing_direction = "east"
                         $this.position_x++
                     }
-                    Default {}
+                    Default {
+                        write-host "stop"
+                    }
                 }
             }
             "steady" { 
@@ -130,10 +136,14 @@ class virus_carrier {
                         $this.facing_direction = "west"
                         $this.position_x--
                     }
-                    Default {}
+                    Default {
+                        write-host "stop"
+                    }
                 }
             }
-            Default {}
+            Default {
+                write-host "stop"
+            }
         }
 
     }

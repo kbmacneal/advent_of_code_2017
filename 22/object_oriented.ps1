@@ -1,7 +1,7 @@
-class point{
-[int]$position_x
-[int]$position_y
-[bool]$infected
+class point {
+    [int]$position_x
+    [int]$position_y
+    [bool]$infected
 }
 
 class virus_carrier {
@@ -10,68 +10,73 @@ class virus_carrier {
     [string]$facing_direction = "north"
     [int]$infected_count = 0
     [int]$clean_count = 0
-    do_work($points)
-    {
-        if(($points | Where-Object -Property position_x -eq $this.position_x | Where-Object -Property position_y -EQ $this.position_y | measure-object).count -eq 0)
-        {
+    do_work($points) {
+        if (($points | Where-Object -Property position_x -eq $this.position_x | Where-Object -Property position_y -EQ $this.position_y | measure-object).count -eq 0) {
             $point = New-Object -TypeName point
             $point.position_x = $this.position_x
             $point.position_y = $this.position_y
             $point.infected = $false
-            [void]$points.Add($point)
+            $points.Add($point)
         }
 
-        $turn = ""
-        if(($points | Where-Object -Property position_x -eq $this.position_x | Where-Object -Property position_y -EQ $this.position_y).infected -eq $true)
-        {
-            $turn = "right"
-            $this.clean_count++
-            ($points | Where-Object -Property position_x -eq $this.position_x | Where-Object -Property position_y -EQ $this.position_y) | % {$_.infected = $false}
+        $current_point = $($points | Where-Object -Property position_x -eq $this.position_x | Where-Object -Property position_y -EQ $this.position_y)
 
+        
+        if ($current_point.infected -eq $true) {
+            $turn = "right"
+            
+            $current_point.infected = $false
+            $this.clean_count++
             switch ($this.facing_direction) {
                 "north" { 
                     $this.facing_direction = "east"
                     $this.position_x++
-                 }
+                }
                 "south" { 
                     $this.facing_direction = "west"
                     $this.position_x--
-                 }
+                }
                 "east" { 
                     $this.facing_direction = "south"
                     $this.position_y--
-                 }
+                }
                 "west" { 
                     $this.facing_direction = "north"
                     $this.position_y++
-                 }
-                Default {}
+                }
+                Default {
+
+                    write-host "stop"
+                }
             }
         }
-        else{
+        else {
             $turn = "left"
+            
+            $current_point.infected = $true
             $this.infected_count++
-            ($points | Where-Object -Property position_x -eq $this.position_x | Where-Object -Property position_y -EQ $this.position_y) | % {$_.infected = $true}
             switch ($this.facing_direction) {
                 "north" { 
                     $this.facing_direction = "west"
                     $this.position_x--
                     
-                 }
+                }
                 "south" { 
                     $this.facing_direction = "east"
                     $this.position_x++
-                 }
+                }
                 "east" { 
                     $this.facing_direction = "north"
                     $this.position_y++
                     
-                 }
+                }
                 "west" { 
                     $this.facing_direction = "south"
                     $this.position_y--
-                 }
-                Default {}
+                }
+                Default {
+                    write-host "stop"
+                }
             }
             
         }
@@ -79,10 +84,7 @@ class virus_carrier {
     
 }
 
-
-
-
-$inputs = get-content  .\input_test.txt
+$inputs = get-content  .\input.txt
 
 $array = New-Object System.Collections.ArrayList
 
@@ -104,8 +106,7 @@ $arr_x_size = $inputs[0].Length
 for ($y = 0; $y -lt $arr_y_size; $y++) {
     for ($x = 0; $x -lt $arr_x_size; $x++) {
         $infected = $false
-        if($array[$y][$x] -like "#")
-        {
+        if ($array[$y][$x] -like "#") {
             $infected = $true
         }
 
@@ -117,9 +118,9 @@ for ($y = 0; $y -lt $arr_y_size; $y++) {
     }
 }
 
-[int]$pos_x = [Math]::Floor($arr_x_size/2)
+[int]$pos_x = [Math]::Floor($arr_x_size / 2)
 
-[int]$pos_y = [Math]::Floor($arr_y_size/2)
+[int]$pos_y = [Math]::Floor($arr_y_size / 2)
 
 $virus = New-Object -TypeName virus_carrier
 $virus.position_x = $pos_x
@@ -128,10 +129,10 @@ $virus.facing_direction = "north"
 
 $tick = 0
 
-while ($tick -lt 10000) {
+do {
     
     $virus.do_work($points)
     $tick++
-}
+} while ($tick -lt 10000)
 
 return $virus.infected_count
