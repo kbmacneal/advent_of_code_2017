@@ -1,0 +1,10 @@
+C:\Users\kentw\Desktop\git_workspace\advent_of_code_2017\22\doublecheck\bin\Debug\netcoreapp2.0\doublecheck.deps.json
+C:\Users\kentw\Desktop\git_workspace\advent_of_code_2017\22\doublecheck\bin\Debug\netcoreapp2.0\doublecheck.runtimeconfig.json
+C:\Users\kentw\Desktop\git_workspace\advent_of_code_2017\22\doublecheck\bin\Debug\netcoreapp2.0\doublecheck.runtimeconfig.dev.json
+C:\Users\kentw\Desktop\git_workspace\advent_of_code_2017\22\doublecheck\bin\Debug\netcoreapp2.0\doublecheck.dll
+C:\Users\kentw\Desktop\git_workspace\advent_of_code_2017\22\doublecheck\bin\Debug\netcoreapp2.0\doublecheck.pdb
+C:\Users\kentw\Desktop\git_workspace\advent_of_code_2017\22\doublecheck\obj\Debug\netcoreapp2.0\doublecheck.csproj.CoreCompileInputs.cache
+C:\Users\kentw\Desktop\git_workspace\advent_of_code_2017\22\doublecheck\obj\Debug\netcoreapp2.0\doublecheck.AssemblyInfoInputs.cache
+C:\Users\kentw\Desktop\git_workspace\advent_of_code_2017\22\doublecheck\obj\Debug\netcoreapp2.0\doublecheck.AssemblyInfo.cs
+C:\Users\kentw\Desktop\git_workspace\advent_of_code_2017\22\doublecheck\obj\Debug\netcoreapp2.0\doublecheck.dll
+C:\Users\kentw\Desktop\git_workspace\advent_of_code_2017\22\doublecheck\obj\Debug\netcoreapp2.0\doublecheck.pdb
