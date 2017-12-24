@@ -5,6 +5,19 @@
    "version": "0.2.0",
    "configurations": [
        {
+           "name": "Integrated Terminal/Console",
+           "type": "python",
+           "request": "launch",
+           "stopOnEntry": true,
+           "pythonPath": "${config:python.pythonPath}",
+           "program": "${file}",
+           "cwd": "",
+           "console": "integratedTerminal",
+           "env": {},
+           "envFile": "${workspaceFolder}/.env",
+           "debugOptions": []
+       },
+       {
            "type": "PowerShell",
            "request": "launch",
            "name": "debug powershell",
