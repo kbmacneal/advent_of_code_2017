@@ -1,3 +1,7 @@
+#it turns out htat the instructions are parsable YAML, so you could in theory parse the input using this module
+#https://www.red-gate.com/simple-talk/blogs/psyaml-powershell-yaml/
+# and load the instructionset dynamically. Not wanting to give myself a massive migraine for doing that, i went with hardcoded values.
+
 class read_head {
     [int]$current_position
     [string]$current_state

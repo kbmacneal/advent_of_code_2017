@@ -670,11 +670,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "c:\\advent_of_code_2017\\18\\dueling_programs\\dueling_programs.csproj",
+      "projectUniqueName": "c:\\advent_of_code_2017\\18_not_complete\\dueling_programs\\dueling_programs.csproj",
       "projectName": "dueling_programs",
-      "projectPath": "c:\\advent_of_code_2017\\18\\dueling_programs\\dueling_programs.csproj",
+      "projectPath": "c:\\advent_of_code_2017\\18_not_complete\\dueling_programs\\dueling_programs.csproj",
       "packagesPath": "C:\\Users\\Kenneth MacNeal\\.nuget\\packages\\",
-      "outputPath": "c:\\advent_of_code_2017\\18\\dueling_programs\\obj\\",
+      "outputPath": "c:\\advent_of_code_2017\\18_not_complete\\dueling_programs\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
