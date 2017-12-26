@@ -18,7 +18,8 @@ namespace day24 {
             }
 
             int Search (IImmutableList<(int, int)> e, int cur = 0, int strength = 0) {
-                return e.Where (x => x.Item1 == cur || x.Item2 == cur).Select (x => Search (e.Remove (x), x.Item1 == cur ? x.Item2 : x.Item1, strength + x.Item1 + x.Item2)).Concat (Enumerable.Repeat (strength, 1)).Max ();
+                return e.Where (x => x.Item1 == cur || x.Item2 == cur).Select (x => Search (e.Remove (x), x.Item1 == cur ? x.Item2 : x.Item1, strength + x.Item1 + x.Item2)).Max ();
+                //.Concat (Enumerable.Repeat (strength, 1)).Max ();
             }
 
             (int, int) Search2 (IImmutableList<(int, int)> e, int cur = 0, int strength = 0, int length = 0) {

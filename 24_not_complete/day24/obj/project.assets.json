@@ -701,11 +701,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "c:\\advent_of_code_2017\\24_not_complete\\day24\\day24.csproj",
+      "projectUniqueName": "C:\\advent_of_code_2017\\24_not_complete\\day24\\day24.csproj",
       "projectName": "day24",
-      "projectPath": "c:\\advent_of_code_2017\\24_not_complete\\day24\\day24.csproj",
+      "projectPath": "C:\\advent_of_code_2017\\24_not_complete\\day24\\day24.csproj",
       "packagesPath": "C:\\Users\\Kenneth MacNeal\\.nuget\\packages\\",
-      "outputPath": "c:\\advent_of_code_2017\\24_not_complete\\day24\\obj\\",
+      "outputPath": "C:\\advent_of_code_2017\\24_not_complete\\day24\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

@@ -8,3 +8,13 @@ C:\Users\kentw\Desktop\git_workspace\advent_of_code_2017\24\day24\bin\Debug\netc
 C:\Users\kentw\Desktop\git_workspace\advent_of_code_2017\24\day24\bin\Debug\netcoreapp2.0\day24.pdb
 C:\Users\kentw\Desktop\git_workspace\advent_of_code_2017\24\day24\obj\Debug\netcoreapp2.0\day24.dll
 C:\Users\kentw\Desktop\git_workspace\advent_of_code_2017\24\day24\obj\Debug\netcoreapp2.0\day24.pdb
+C:\advent_of_code_2017\24_not_complete\day24\bin\Debug\netcoreapp2.0\day24.deps.json
+C:\advent_of_code_2017\24_not_complete\day24\bin\Debug\netcoreapp2.0\day24.runtimeconfig.json
+C:\advent_of_code_2017\24_not_complete\day24\bin\Debug\netcoreapp2.0\day24.runtimeconfig.dev.json
+C:\advent_of_code_2017\24_not_complete\day24\bin\Debug\netcoreapp2.0\day24.dll
+C:\advent_of_code_2017\24_not_complete\day24\bin\Debug\netcoreapp2.0\day24.pdb
+C:\advent_of_code_2017\24_not_complete\day24\obj\Debug\netcoreapp2.0\day24.csproj.CoreCompileInputs.cache
+C:\advent_of_code_2017\24_not_complete\day24\obj\Debug\netcoreapp2.0\day24.AssemblyInfoInputs.cache
+C:\advent_of_code_2017\24_not_complete\day24\obj\Debug\netcoreapp2.0\day24.AssemblyInfo.cs
+C:\advent_of_code_2017\24_not_complete\day24\obj\Debug\netcoreapp2.0\day24.dll
+C:\advent_of_code_2017\24_not_complete\day24\obj\Debug\netcoreapp2.0\day24.pdb
