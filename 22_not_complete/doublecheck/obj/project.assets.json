@@ -670,13 +670,12 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "c:\\advent_of_code_2017\\14\\get_groups\\get_groups.csproj",
-      "projectName": "get_groups",
-      "projectPath": "c:\\advent_of_code_2017\\14\\get_groups\\get_groups.csproj",
+      "projectUniqueName": "C:\\advent_of_code_2017\\22\\doublecheck\\doublecheck.csproj",
+      "projectName": "doublecheck",
+      "projectPath": "C:\\advent_of_code_2017\\22\\doublecheck\\doublecheck.csproj",
       "packagesPath": "C:\\Users\\Kenneth MacNeal\\.nuget\\packages\\",
-      "outputPath": "c:\\advent_of_code_2017\\14\\get_groups\\obj\\",
+      "outputPath": "C:\\advent_of_code_2017\\22\\doublecheck\\obj\\",
       "projectStyle": "PackageReference",
-      "crossTargeting": true,
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],

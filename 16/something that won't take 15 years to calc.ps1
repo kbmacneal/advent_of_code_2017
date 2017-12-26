@@ -72,7 +72,7 @@ $known_states = New-Object 'System.Collections.Generic.List[string]'
 $end = 1000000000
 
 for ($i = 0; $i -lt $end; $i++) {
-    write-host $i
+    
     $programs = perform_dance -programs $programs -inputs $inputs
     if ($($programs -join "") -in $known_states) {
         [int]$index = $($end % ($i+1))

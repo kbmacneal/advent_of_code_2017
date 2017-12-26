@@ -81,6 +81,3 @@ foreach ($particle in $particles) {do_manhattan_dist -particle $particle}
 $part1 = $particles | sort -Property total_acc,total_vel,man_dist | select -first 1
 
 return $part1.index
-
-#$particles | Sort-Object -Property @{Expression = {[Math]::Abs($_.acc_x) + [System.Math]::Abs($_.acc_y) + [Math]::Abs($_.acc_z)}; Ascending = $true; Descending = $false},@{Expression = {[Math]::Abs($_.vel_x) + [System.Math]::Abs($_.vel_y) + [Math]::Abs($_.vel_z)}; Ascending = $true; Descending = $false} | select -Property index -First 1
-
