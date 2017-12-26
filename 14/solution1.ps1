@@ -104,12 +104,14 @@ return $grid
 
 $inputs = "jzgqcdpd"
 
-$rows = 0..127 | foreach {
-    (get-knothash "$inputs-$_")
+
+ $rows = @()
+
+ for ($i = 0; $i -lt 128; $i++) {
+     $rows += (get-knothash -input_string "$inputs-$i")
  }
 
-$count = 0
+$binStr = -join ($rows| foreach {$_.getenumerator().foreach{$hex["$_"]}})
+($binStr -replace '0').Length
 
-$binary_Str.GetEnumerator() | foreach {if($_ -eq "1"){$count++}}
-
-$count
+#8074

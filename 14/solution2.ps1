@@ -189,7 +189,6 @@ for ($i = 0; $i -lt 128; $i++)
 		$cell = $grid | Where-Object -Property X -eq $j | Where-Object -Property Y -eq $i
 		if ($cell.link_num -eq $null)
 		{
-            $region_number
 			$region_number++
 			get-connectedcells -cell_list $grid -cell_start $cell -regnum $region_number
 		}
