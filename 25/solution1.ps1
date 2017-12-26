@@ -4,8 +4,6 @@ class read_head {
 
     perform_action($strip) {
 
-        #$current_value = $strip[$this.current_position]
-
         switch ($this.current_state) {
             "A" { 
                 if ($strip[$this.current_position] -eq 0) {
@@ -116,12 +114,4 @@ while ($tick -lt $max) {
 
 $count = 0
 
-$strip.Count
-
 return [System.Linq.Enumerable]::Sum([int[]]$strip)
-
-<#foreach ($item in $strip) {
-    $count += [int]$item
-}
-
-return $count#>
