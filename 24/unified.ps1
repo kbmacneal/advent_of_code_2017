@@ -1,6 +1,6 @@
 class lenstren {
-    [int]$length
-	[int]$strength
+    [int]$lengths
+	[int]$strengths
 	$tuple
 }
 
@@ -8,15 +8,15 @@ $lines = get-content .\input.txt
 
 $edges = New-Object System.Collections.Arraylist
 
-function do_search2 ($edges, [int]$current = 0, [int]$strength = 0, [int]$length = 0, $list) {
+function do_search2 ($edges, [int]$current, [int]$strength, [int]$length, $list) {
     $edges | ? {$_.Item1 -eq $current -or $_.Item2 -eq $current} | % {
 
 		$st = $strength + $_.Item1 + $_.Item2
-        $len = $length++
+        $len = $length + 1
 	
         $obj = New-Object lenstren
-        $obj.length = $len
-		$obj.strength = $st
+        $obj.lengths = $len
+		$obj.strengths = $st
 		[int]$a = $_.Item1
 		[int]$b = $_.Item2
 		$obj.tuple = [System.Tuple]::Create([int]$a,[int]$b)
@@ -46,14 +46,13 @@ $list = New-Object System.Collections.Arraylist
 
 do_search2 -edges $edges -current 0 -strength 0 -length 0 -list $list
 
-$list | sort -property strength -descending | select -first 1
+$list | sort -property strengths -descending | select -first 1
 
 #part 2 isnt working atm, and i don't know why
-$list | sort -Property length -Descending | select -First 1
+$list | sort -Property lengths,strengths -Descending | select -First 1
 
-Pause
-
-$list
+$list | Export-Clixml list.xml
+#$list | Export-Clixml list_test.xml
 
 #1695
 #1673
