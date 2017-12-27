@@ -111,10 +111,12 @@ $virus.facing_direction = "north"
 
 $tick = 0
 
-while ($tick -lt 10000) {
+while ($tick -lt 70) {
     
     $virus.do_work($array)
     $tick++
 }
 
 return $virus.infected_count
+
+#5330
