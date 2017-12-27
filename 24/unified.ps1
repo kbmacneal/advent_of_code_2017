@@ -48,7 +48,7 @@ do_search2 -edges $edges -current 0 -strength 0 -length 0 -list $list
 
 $list | sort -property strengths -descending | select -first 1
 
-#part 2 isnt working atm, and i don't know why
+#there we go, length was not applying properly we good!
 $list | sort -Property lengths,strengths -Descending | select -First 1
 
 $list | Export-Clixml list.xml
