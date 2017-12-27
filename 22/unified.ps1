@@ -40,7 +40,7 @@ $grid = foreach ($row in $in) {
     $row_num++
 }
 #for part 2 set to true
-$part2 = $false
+$part2 = $true
 if ($part2) {
     $loops = 10000000
 } else {
