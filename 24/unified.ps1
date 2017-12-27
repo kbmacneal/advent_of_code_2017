@@ -51,8 +51,5 @@ $list | sort -property strengths -descending | select -first 1
 #there we go, length was not applying properly we good!
 $list | sort -Property lengths,strengths -Descending | select -First 1
 
-$list | Export-Clixml list.xml
-#$list | Export-Clixml list_test.xml
-
 #1695
 #1673
