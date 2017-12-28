@@ -7,82 +7,38 @@ $gen_b_start = 354
 #use modulo
 $shared_divisor = 2147483647
 
-$hex = @{
-	'0' = '0000'
-	'1' = '0001'
-	'2' = '0010'
-	'3' = '0011'
-	'4' = '0100'
-	'5' = '0101'
-	'6' = '0110'
-	'7' = '0111'
-	'8' = '1000'
-	'9' = '1001'
-	'a' = '1010'
-	'b' = '1011'
-	'c' = '1100'
-	'd' = '1101'
-	'e' = '1110'
-	'f' = '1111'
-}
+function calc_value([long]$value, $multiple, $divisor) {
+    [long]$val = ($value * $multiple) % $divisor
 
-function calc_value([System.Uint64]$value, $multiple, $divisor)
-{
-	[System.Uint64]$val = ($value * $multiple) % $divisor
-
-	return $val
-}
-
-function convert_to_bin([System.Uint64]$value)
-
-{
-	$binary_Str_array = new-object 'System.Collections.Generic.List[int]'
-	$bitmask = 65535
-
-	return ($value -band $bitmask).ToString()
-=
+    return $val
 }
 
 $count = 0
 
-$a_val_list = new-object 'System.Collections.Generic.List[System.Uint64]'
+$a_val_list = new-object 'System.Collections.Generic.List[long]'
 
-$b_val_list = new-object 'System.Collections.Generic.List[System.Uint64]'
+$b_val_list = new-object 'System.Collections.Generic.List[long]'
 
 [void]$a_val_list.Add($gen_a_start)
+
 [void]$b_val_list.Add($gen_b_start)
 
-$a_compare_list = new-object 'System.Collections.Generic.List[System.String]'
-
-$b_compare_list = new-object 'System.Collections.Generic.List[System.String]'
+$bitmask = 65535
 
 
-for ($i = 0; $i -lt 40000000; $i++)
-{
+for ($i = 0; $i -lt 40000000; $i++) {
 	
-	[System.Uint64]$a_val = calc_value -value $($a_val_list[$a_val_list.Count - 1]) -multiple $factor_a -divisor $shared_divisor
-	[void]$a_val_list.Add($a_val)
-	$a_compare = convert_to_bin -value $a_val
+    [long]$a_val = calc_value -value $($a_val_list[$a_val_list.Count - 1]) -multiple $factor_a -divisor $shared_divisor
+    [void]$a_val_list.Add($a_val)
+    $a_compare = $($a_val -band $bitmask)
 	
-	[System.Uint64]$b_val = calc_value -value $($b_val_list[$b_val_list.Count - 1]) -multiple $factor_b -divisor $shared_divisor
-	[void]$b_val_list.Add($b_val)
-	$b_compare = convert_to_bin -value $b_val
+    [long]$b_val = calc_value -value $($b_val_list[$b_val_list.Count - 1]) -multiple $factor_b -divisor $shared_divisor
+    [void]$b_val_list.Add($b_val)
+    $b_compare = $($b_val -band $bitmask)
 
-	[void]$a_compare_list.add($a_compare)
-	[void]$b_compare_list.add($b_compare)
+    if($a_compare -eq $b_compare){$count++}
 	
 }
 
-write-progress -completed
-
-for ($i = 0; $i -lt $a_compare_list.count; $i++)
-{
-	if ($a_compare_list[$i] -eq $b_compare_list[$i])
-	{
-		$count++
-	}
-}
-
-
-#should be 612
-$count
+#612
+return $count
