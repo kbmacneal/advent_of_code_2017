@@ -37,7 +37,6 @@ for ($i = 0; $i -lt 40000000; $i++) {
     $b_compare = $($b_val -band $bitmask)
 
     if($a_compare -eq $b_compare){$count++}
-	
 }
 
 #612
