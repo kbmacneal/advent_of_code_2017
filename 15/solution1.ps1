@@ -37,12 +37,10 @@ function convert_to_bin([System.Uint64]$value)
 
 {
 	$binary_Str_array = new-object 'System.Collections.Generic.List[int]'
+	$bitmask = 65535
 
-	$null = -join ($value.tostring().getenumerator() | foreach {$hex["$_"]} | foreach {[void]$binary_Str_array.Add([int]$_)})
-	
-	[string]$final_bin_string = $binary_Str_array -join ""
-
-	return $final_bin_string.ToString().Substring($($final_bin_string.ToString().Length - 16),16)	
+	return ($value -band $bitmask).ToString()
+=
 }
 
 $count = 0
@@ -72,9 +70,6 @@ for ($i = 0; $i -lt 40000000; $i++)
 
 	[void]$a_compare_list.add($a_compare)
 	[void]$b_compare_list.add($b_compare)
-
-	
-	Write-Progress -Activity "calculating list" -Status $count.tostring() -PercentComplete $(($i / 4000000) * 100)
 	
 }
 
